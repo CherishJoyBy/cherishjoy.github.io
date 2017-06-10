@@ -1,0 +1,1055 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,CocoaAsyncSocket,TCP,粘包," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="本文介绍了CocoaAsyncSocket库中GCDAsyncSocket类的使用、粘包处理以及时间延迟测试.  一.CocoaAsyncSocket介绍CocoaAsyncSocket中主要包含两个类: 1.GCDAsyncSocket.  用GCD搭建的基于TCP/IP协议的socket网络库GCDAsyncSocket is a TCP/IP socket networking libra">
+<meta name="keywords" content="iOS,CocoaAsyncSocket,TCP,粘包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS开发之CocoaAsyncSocket使用">
+<meta property="og:url" content="http://cherishJoy.com/2017/06/07/iOS开发之CocoaAsyncSocket使用/index.html">
+<meta property="og:site_name" content="CherishJoy&#39;s blog">
+<meta property="og:description" content="本文介绍了CocoaAsyncSocket库中GCDAsyncSocket类的使用、粘包处理以及时间延迟测试.  一.CocoaAsyncSocket介绍CocoaAsyncSocket中主要包含两个类: 1.GCDAsyncSocket.  用GCD搭建的基于TCP/IP协议的socket网络库GCDAsyncSocket is a TCP/IP socket networking libra">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-680f66e017b5023b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-a9e6ad00224a4797.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-b5e961ac743ee34a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-a8063f5d337291a2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/250">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-d519290042d0b2c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-50b2d85bf6c5534f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:updated_time" content="2017-06-10T17:26:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS开发之CocoaAsyncSocket使用">
+<meta name="twitter:description" content="本文介绍了CocoaAsyncSocket库中GCDAsyncSocket类的使用、粘包处理以及时间延迟测试.  一.CocoaAsyncSocket介绍CocoaAsyncSocket中主要包含两个类: 1.GCDAsyncSocket.  用GCD搭建的基于TCP/IP协议的socket网络库GCDAsyncSocket is a TCP/IP socket networking libra">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/3284707-680f66e017b5023b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://cherishJoy.com/2017/06/07/iOS开发之CocoaAsyncSocket使用/"/>
+
+
+
+
+
+  <title>iOS开发之CocoaAsyncSocket使用 | CherishJoy's blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CherishJoy's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://cherishJoy.com/2017/06/07/iOS开发之CocoaAsyncSocket使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cherishJoy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CherishJoy's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS开发之CocoaAsyncSocket使用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-07T18:27:01+08:00">
+                2017-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categorys/iOS第三方使用/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS第三方使用</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/06/07/iOS开发之CocoaAsyncSocket使用/" class="leancloud_visitors" data-flag-title="iOS开发之CocoaAsyncSocket使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2,919
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  12
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本文介绍了CocoaAsyncSocket库中GCDAsyncSocket类的使用、粘包处理以及时间延迟测试.</p>
+</blockquote>
+<h3 id="一-CocoaAsyncSocket介绍"><a href="#一-CocoaAsyncSocket介绍" class="headerlink" title="一.CocoaAsyncSocket介绍"></a>一.CocoaAsyncSocket介绍</h3><p>CocoaAsyncSocket中主要包含两个类:</p>
+<p>1.GCDAsyncSocket.</p>
+<blockquote>
+<p>用GCD搭建的基于TCP/IP协议的socket网络库<br>GCDAsyncSocket is a TCP/IP socket networking library built atop Grand Central Dispatch. – 引自CocoaAsyncSocket.</p>
+</blockquote>
+<p>2.GCDAsyncUdpSocket.</p>
+<blockquote>
+<p>用GCD搭建的基于UDP/IP协议的socket网络库.<br>GCDAsyncUdpSocket is a UDP/IP socket networking library built atop Grand Central Dispatch..– 引自CocoaAsyncSocket.</p>
+</blockquote>
+<h3 id="二-下载CocoaAsyncSocket"><a href="#二-下载CocoaAsyncSocket" class="headerlink" title="二.下载CocoaAsyncSocket"></a>二.下载CocoaAsyncSocket</h3><h4 id="首先-需要到这里下载CocoaAsyncSocket"><a href="#首先-需要到这里下载CocoaAsyncSocket" class="headerlink" title="首先,需要到这里下载CocoaAsyncSocket."></a>首先,需要到<a href="https://github.com/robbiehanson/CocoaAsyncSocket" target="_blank" rel="external">这里</a>下载CocoaAsyncSocket.</h4><h4 id="下载后可以看到文件所在位置"><a href="#下载后可以看到文件所在位置" class="headerlink" title="下载后可以看到文件所在位置."></a>下载后可以看到文件所在位置.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-680f66e017b5023b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="文件路径"></p>
+<h4 id="这里只要拷贝以下两个文件到项目中"><a href="#这里只要拷贝以下两个文件到项目中" class="headerlink" title="这里只要拷贝以下两个文件到项目中."></a>这里只要拷贝以下两个文件到项目中.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-a9e6ad00224a4797.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="TCP开发使用的文件"></p>
+<h3 id="三-客户端"><a href="#三-客户端" class="headerlink" title="三.客户端"></a>三.客户端</h3><p>因为,大部分项目已经有服务端socket,所以,先讲解客户端创建过程.</p>
+<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤:"></a>步骤:</h4><h5 id="1-继承GCDAsyncSocketDelegate协议"><a href="#1-继承GCDAsyncSocketDelegate协议" class="headerlink" title="1.继承GCDAsyncSocketDelegate协议."></a>1.继承<code>GCDAsyncSocketDelegate</code>协议.</h5><h5 id="2-声明属性"><a href="#2-声明属性" class="headerlink" title="2.声明属性"></a>2.声明属性</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 客户端socket</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">strong</span>, <span class="keyword">nonatomic</span>) GCDAsyncSocket *clientSocket;</div></pre></td></tr></table></figure>
+<h5 id="3-创建socket并指定代理对象为self-代理队列必须为主队列"><a href="#3-创建socket并指定代理对象为self-代理队列必须为主队列" class="headerlink" title="3.创建socket并指定代理对象为self,代理队列必须为主队列."></a>3.创建socket并指定代理对象为self,代理队列必须为主队列.</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">self</span>.clientSocket = [[GCDAsyncSocket alloc] initWithDelegate:<span class="keyword">self</span> delegateQueue:dispatch_get_main_queue()];</div></pre></td></tr></table></figure>
+<h5 id="4-连接指定主机的对应端口"><a href="#4-连接指定主机的对应端口" class="headerlink" title="4.连接指定主机的对应端口."></a>4.连接指定主机的对应端口.</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSError</span> *error = <span class="literal">nil</span>;</div><div class="line"><span class="keyword">self</span>.connected = [<span class="keyword">self</span>.clientSocket connectToHost:<span class="keyword">self</span>.addressTF.text onPort:[<span class="keyword">self</span>.portTF.text integerValue] viaInterface:<span class="literal">nil</span> withTimeout:<span class="number">-1</span> error:&amp;error];</div></pre></td></tr></table></figure>
+<h5 id="5-成功连接主机对应端口号"><a href="#5-成功连接主机对应端口号" class="headerlink" title="5.成功连接主机对应端口号."></a>5.成功连接主机对应端口号.</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)socket:(GCDAsyncSocket *)sock didConnectToHost:(<span class="built_in">NSString</span> *)host port:(uint16_t)port </div><div class="line">&#123;</div><div class="line"><span class="comment">//    NSLog(@"连接主机对应端口%@", sock);</span></div><div class="line">    [<span class="keyword">self</span> showMessageWithStr:<span class="string">@"链接成功"</span>];</div><div class="line">    [<span class="keyword">self</span> showMessageWithStr:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"服务器IP: %@-------端口: %d"</span>, host,port]];</div><div class="line">    </div><div class="line">    <span class="comment">// 连接成功开启定时器</span></div><div class="line">    [<span class="keyword">self</span> addTimer];</div><div class="line">    <span class="comment">// 连接后,可读取服务端的数据</span></div><div class="line">    [<span class="keyword">self</span>.clientSocket readDataWithTimeout:- <span class="number">1</span> tag:<span class="number">0</span>];</div><div class="line">    <span class="keyword">self</span>.connected = <span class="literal">YES</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意:<br><em>The host parameter will be an IP address, not a DNS name. – </em>引自GCDAsyncSocket<br>连接的主机为IP地址,并非DNS名称.</p>
+<h5 id="6-发送数据给服务端"><a href="#6-发送数据给服务端" class="headerlink" title="6.发送数据给服务端"></a>6.发送数据给服务端</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 发送数据</span></div><div class="line">- (<span class="keyword">IBAction</span>)sendMessageAction:(<span class="keyword">id</span>)sender</div><div class="line">&#123;</div><div class="line">    <span class="built_in">NSData</span> *data = [<span class="keyword">self</span>.messageTextF.text dataUsingEncoding:<span class="built_in">NSUTF8StringEncoding</span>];</div><div class="line">    <span class="comment">// withTimeout -1 : 无穷大,一直等</span></div><div class="line">    <span class="comment">// tag : 消息标记</span></div><div class="line">    [<span class="keyword">self</span>.clientSocket writeData:data withTimeout:- <span class="number">1</span> tag:<span class="number">0</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意:<br>发送数据主要通过<code>- (void)writeData:(NSData *)data withTimeout:(NSTimeInterval)timeout tag:(long)tag</code>写入数据的.</p>
+<h5 id="7-读取服务端数据"><a href="#7-读取服务端数据" class="headerlink" title="7.读取服务端数据"></a>7.读取服务端数据</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> 读取数据</div><div class="line"></div><div class="line"> @param sock 客户端socket</div><div class="line"> @param data 读取到的数据</div><div class="line"> @param tag 本次读取的标记</div><div class="line"> */</div><div class="line">- (<span class="keyword">void</span>)socket:(GCDAsyncSocket *)sock didReadData:(<span class="built_in">NSData</span> *)data withTag:(<span class="keyword">long</span>)tag </div><div class="line">&#123;</div><div class="line">    <span class="built_in">NSString</span> *text = [[<span class="built_in">NSString</span> alloc]initWithData:data encoding:<span class="built_in">NSUTF8StringEncoding</span>];</div><div class="line">    [<span class="keyword">self</span> showMessageWithStr:text];</div><div class="line">    <span class="comment">// 读取到服务端数据值后,能再次读取</span></div><div class="line">    [<span class="keyword">self</span>.clientSocket readDataWithTimeout:- <span class="number">1</span> tag:<span class="number">0</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意:<br>有的人写好代码,而且第一次能够读取到数据,之后,再也接收不到数据.那是因为,在读取到数据的代理方法中,需要再次调用<code>[self.clientSocket readDataWithTimeout:- 1 tag:0];</code>方法,框架本身就是这么设计的.</p>
+<h5 id="8-客户端socket断开连接"><a href="#8-客户端socket断开连接" class="headerlink" title="8.客户端socket断开连接."></a>8.客户端socket断开连接.</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> 客户端socket断开</div><div class="line"></div><div class="line"> @param sock 客户端socket</div><div class="line"> @param err 错误描述</div><div class="line"> */</div><div class="line">- (<span class="keyword">void</span>)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(<span class="built_in">NSError</span> *)err</div><div class="line">&#123;</div><div class="line">    [<span class="keyword">self</span> showMessageWithStr:<span class="string">@"断开连接"</span>];</div><div class="line">    <span class="keyword">self</span>.clientSocket.delegate = <span class="literal">nil</span>;</div><div class="line">    <span class="keyword">self</span>.clientSocket = <span class="literal">nil</span>;</div><div class="line">    <span class="keyword">self</span>.connected = <span class="literal">NO</span>;</div><div class="line">    [<span class="keyword">self</span>.connectTimer invalidate];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意:<br>sokect断开连接时,需要清空代理和客户端本身的socket.<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">self</span>.clientSocket.delegate = <span class="literal">nil</span>;</div><div class="line"><span class="keyword">self</span>.clientSocket = <span class="literal">nil</span>;</div></pre></td></tr></table></figure></p>
+<h5 id="9-建立心跳连接"><a href="#9-建立心跳连接" class="headerlink" title="9.建立心跳连接."></a>9.建立心跳连接.</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">// 计时器</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSTimer</span> *connectTimer;</div><div class="line"></div><div class="line"><span class="comment">// 添加定时器</span></div><div class="line">- (<span class="keyword">void</span>)addTimer</div><div class="line">&#123;</div><div class="line">     <span class="comment">// 长连接定时器</span></div><div class="line">    <span class="keyword">self</span>.connectTimer = [<span class="built_in">NSTimer</span> scheduledTimerWithTimeInterval:<span class="number">5.0</span> target:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(longConnectToSocket) userInfo:<span class="literal">nil</span> repeats:<span class="literal">YES</span>];</div><div class="line">     <span class="comment">// 把定时器添加到当前运行循环,并且调为通用模式</span></div><div class="line">    [[<span class="built_in">NSRunLoop</span> currentRunLoop] addTimer:<span class="keyword">self</span>.connectTimer forMode:<span class="built_in">NSRunLoopCommonModes</span>];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 心跳连接</span></div><div class="line">- (<span class="keyword">void</span>)longConnectToSocket</div><div class="line">&#123;</div><div class="line">    <span class="comment">// 发送固定格式的数据,指令@"longConnect"</span></div><div class="line">    <span class="keyword">float</span> version = [[<span class="built_in">UIDevice</span> currentDevice] systemVersion].floatValue;</div><div class="line">    <span class="built_in">NSString</span> *longConnect = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"123%f"</span>,version];</div><div class="line">    </div><div class="line">    <span class="built_in">NSData</span>  *data = [longConnect dataUsingEncoding:<span class="built_in">NSUTF8StringEncoding</span>];</div><div class="line">    </div><div class="line">    [<span class="keyword">self</span>.clientSocket writeData:data withTimeout:- <span class="number">1</span> tag:<span class="number">0</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意:<br>心跳连接中发送给服务端的数据只是作为测试代码,根据你们公司需求,或者和后台商定好心跳包的数据以及发送心跳的时间间隔.因为这个项目的服务端socket也是我写的,所以,我自定义心跳包协议.客户端发送心跳包,服务端也需要有对应的心跳检测,以此检测客户端是否在线.</p>
+<h3 id="四-服务端"><a href="#四-服务端" class="headerlink" title="四.服务端"></a>四.服务端</h3><h4 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤:"></a>步骤:</h4><h5 id="1-继承GCDAsyncSocketDelegate协议-1"><a href="#1-继承GCDAsyncSocketDelegate协议-1" class="headerlink" title="1.继承GCDAsyncSocketDelegate协议."></a>1.继承<code>GCDAsyncSocketDelegate</code>协议.</h5><h5 id="2-声明属性-1"><a href="#2-声明属性-1" class="headerlink" title="2.声明属性"></a>2.声明属性</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 服务端socket(开放端口,监听客户端socket的连接)</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">strong</span>, <span class="keyword">nonatomic</span>) GCDAsyncSocket *serverSocket;</div></pre></td></tr></table></figure>
+<h5 id="3-创建socket并指定代理对象为self-代理队列必须为主队列-1"><a href="#3-创建socket并指定代理对象为self-代理队列必须为主队列-1" class="headerlink" title="3.创建socket并指定代理对象为self,代理队列必须为主队列."></a>3.创建socket并指定代理对象为self,代理队列必须为主队列.</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 初始化服务端socket</span></div><div class="line"><span class="keyword">self</span>.serverSocket = [[GCDAsyncSocket alloc]initWithDelegate:<span class="keyword">self</span> delegateQueue:dispatch_get_main_queue()];</div></pre></td></tr></table></figure>
+<h5 id="4-开放服务端的指定端口"><a href="#4-开放服务端的指定端口" class="headerlink" title="4.开放服务端的指定端口."></a>4.开放服务端的指定端口.</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">BOOL result = [self.serverSocket acceptOnPort:[self.portF.text integerValue] error:&amp;error];</div></pre></td></tr></table></figure>
+<h5 id="5-连接上新的客户端socket"><a href="#5-连接上新的客户端socket" class="headerlink" title="5.连接上新的客户端socket"></a>5.连接上新的客户端socket</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 连接上新的客户端socket</span></div><div class="line">- (<span class="keyword">void</span>)socket:(GCDAsyncSocket *)sock didAcceptNewSocket:(<span class="keyword">nonnull</span> GCDAsyncSocket *)newSocket</div><div class="line">&#123;</div><div class="line">    <span class="comment">// 保存客户端的socket</span></div><div class="line">    [<span class="keyword">self</span>.clientSockets addObject: newSocket];</div><div class="line">    <span class="comment">// 添加定时器</span></div><div class="line">    [<span class="keyword">self</span> addTimer];</div><div class="line">    </div><div class="line">    [<span class="keyword">self</span> showMessageWithStr:<span class="string">@"链接成功"</span>];</div><div class="line">    [<span class="keyword">self</span> showMessageWithStr:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"客户端的地址: %@ -------端口: %d"</span>, newSocket.connectedHost, newSocket.connectedPort]];</div><div class="line">    </div><div class="line">    [newSocket readDataWithTimeout:- <span class="number">1</span> tag:<span class="number">0</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="6-发送数据给客户端"><a href="#6-发送数据给客户端" class="headerlink" title="6.发送数据给客户端"></a>6.发送数据给客户端</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// socket是保存的客户端socket, 表示给这个客户端socket发送消息</span></div><div class="line">- (<span class="keyword">IBAction</span>)sendMessage:(<span class="keyword">id</span>)sender</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(<span class="keyword">self</span>.clientSockets == <span class="literal">nil</span>) <span class="keyword">return</span>;</div><div class="line">    <span class="built_in">NSData</span> *data = [<span class="keyword">self</span>.messageTextF.text dataUsingEncoding:<span class="built_in">NSUTF8StringEncoding</span>];</div><div class="line">    <span class="comment">// withTimeout -1 : 无穷大,一直等</span></div><div class="line">    <span class="comment">// tag : 消息标记</span></div><div class="line">    [<span class="keyword">self</span>.clientSockets enumerateObjectsUsingBlock:^(<span class="keyword">id</span>  _Nonnull obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</div><div class="line">        [obj writeData:data withTimeout:<span class="number">-1</span> tag:<span class="number">0</span>];</div><div class="line">    &#125;];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="7-读取客户端的数据"><a href="#7-读取客户端的数据" class="headerlink" title="7.读取客户端的数据"></a>7.读取客户端的数据</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> 读取客户端发送的数据</div><div class="line"></div><div class="line"> @param sock 客户端的Socket</div><div class="line"> @param data 客户端发送的数据</div><div class="line"> @param tag 当前读取的标记</div><div class="line"> */</div><div class="line">- (<span class="keyword">void</span>)socket:(GCDAsyncSocket *)sock didReadData:(<span class="built_in">NSData</span> *)data withTag:(<span class="keyword">long</span>)tag</div><div class="line">&#123;</div><div class="line">    <span class="built_in">NSString</span> *text = [[<span class="built_in">NSString</span> alloc]initWithData:data encoding:<span class="built_in">NSUTF8StringEncoding</span>];</div><div class="line">    [<span class="keyword">self</span> showMessageWithStr:text];</div><div class="line"></div><div class="line">    <span class="comment">// 第一次读取到的数据直接添加</span></div><div class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>.clientPhoneTimeDicts.count == <span class="number">0</span>)</div><div class="line">    &#123;</div><div class="line">        [<span class="keyword">self</span>.clientPhoneTimeDicts setObject:[<span class="keyword">self</span> getCurrentTime] forKey:text];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// 键相同,直接覆盖,值改变</span></div><div class="line">        [<span class="keyword">self</span>.clientPhoneTimeDicts enumerateKeysAndObjectsUsingBlock:^(<span class="keyword">id</span>  _Nonnull key, <span class="keyword">id</span>  _Nonnull obj, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</div><div class="line">            [<span class="keyword">self</span>.clientPhoneTimeDicts setObject:[<span class="keyword">self</span> getCurrentTime] forKey:text];</div><div class="line">        &#125;];</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    [sock readDataWithTimeout:- <span class="number">1</span> tag:<span class="number">0</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="8-建立检测心跳连接"><a href="#8-建立检测心跳连接" class="headerlink" title="8.建立检测心跳连接."></a>8.建立检测心跳连接.</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 检测心跳计时器</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSTimer</span> *checkTimer;</div><div class="line"></div><div class="line"><span class="comment">// 添加计时器</span></div><div class="line">- (<span class="keyword">void</span>)addTimer</div><div class="line">&#123;</div><div class="line">    <span class="comment">// 长连接定时器</span></div><div class="line">    <span class="keyword">self</span>.checkTimer = [<span class="built_in">NSTimer</span> scheduledTimerWithTimeInterval:<span class="number">10.0</span> target:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(checkLongConnect) userInfo:<span class="literal">nil</span> repeats:<span class="literal">YES</span>];</div><div class="line">    <span class="comment">// 把定时器添加到当前运行循环,并且调为通用模式</span></div><div class="line">    [[<span class="built_in">NSRunLoop</span> currentRunLoop] addTimer:<span class="keyword">self</span>.checkTimer forMode:<span class="built_in">NSRunLoopCommonModes</span>];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 检测心跳</span></div><div class="line">- (<span class="keyword">void</span>)checkLongConnect</div><div class="line">&#123;</div><div class="line">    [<span class="keyword">self</span>.clientPhoneTimeDicts enumerateKeysAndObjectsUsingBlock:^(<span class="keyword">id</span>  _Nonnull key, <span class="keyword">id</span>  _Nonnull obj, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</div><div class="line">        <span class="comment">// 获取当前时间</span></div><div class="line">        <span class="built_in">NSString</span> *currentTimeStr = [<span class="keyword">self</span> getCurrentTime];</div><div class="line">        <span class="comment">// 延迟超过10秒判断断开</span></div><div class="line">        <span class="keyword">if</span> (([currentTimeStr doubleValue] - [obj doubleValue]) &gt; <span class="number">10.0</span>)</div><div class="line">        &#123;</div><div class="line">            [<span class="keyword">self</span> showMessageWithStr:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@已经断开,连接时差%f"</span>,key,[currentTimeStr doubleValue] - [obj doubleValue]]];</div><div class="line">            [<span class="keyword">self</span> showMessageWithStr:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"移除%@"</span>,key]];</div><div class="line">            [<span class="keyword">self</span>.clientPhoneTimeDicts removeObjectForKey:key];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            [<span class="keyword">self</span> showMessageWithStr:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@处于连接状态,连接时差%f"</span>,key,[currentTimeStr doubleValue] - [obj doubleValue]]];</div><div class="line">        &#125;</div><div class="line">    &#125;];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>心跳检测方法只提供部分思路:<br>1.懒加载一个<code>可变字典</code>,字典的<code>键</code>作为<code>客户端的标识</code>.如:<code>客户端标识</code>为<code>13123456789</code>.</p>
+<p>2.在<code>- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag</code>方法中,将<code>读取到的数据</code>或者<code>数据中的部分字符串</code>作为键.字典的<code>值</code>为<code>系统当前时间</code>.服务端第一次读取数据时,字典中没有数据,所以,直接添加到可变字典中,之后每次读取数据时,都用字典的<code>setObject: forKey:</code>方法添加字典,若<code>存储的键相同</code>,即<code>客户端标识相同</code>,键会被覆盖,再使用<code>系统的当前时间</code>作为值.</p>
+<p>3.在<code>- (void)checkLongConnect</code>中,获取此时的<code>当前时间</code>,遍历字典,将每个键的值和当前时间进行比较即可.判断的延迟时间可以写8秒.时间自定.之后,再根据自己的需求进行后续处理.</p>
+<h3 id="五-数据粘包处理"><a href="#五-数据粘包处理" class="headerlink" title="五.数据粘包处理."></a>五.数据粘包处理.</h3><h4 id="1-粘包情况"><a href="#1-粘包情况" class="headerlink" title="1.粘包情况."></a>1.粘包情况.</h4><p>例如:包数据为:<code>abcd</code>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">接收类型</th>
+<th style="text-align:center">第1次接收</th>
+<th style="text-align:center">第2次接收</th>
+<th style="text-align:center">第3次接收</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">完整型</td>
+<td style="text-align:center">abcd</td>
+<td style="text-align:center">abcdabcd</td>
+<td style="text-align:center">abcdabcdabcd</td>
+</tr>
+<tr>
+<td style="text-align:center">多余型</td>
+<td style="text-align:center">abcdab</td>
+<td style="text-align:center">cdabcdab</td>
+<td style="text-align:center">cdabcdabcdab</td>
+</tr>
+<tr>
+<td style="text-align:center">不完整型</td>
+<td style="text-align:center">ab</td>
+<td style="text-align:center">cda</td>
+<td style="text-align:center">bcdabc</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-粘包解决思路"><a href="#2-粘包解决思路" class="headerlink" title="2.粘包解决思路."></a>2.粘包解决思路.</h4><h5 id="思路1"><a href="#思路1" class="headerlink" title="思路1:"></a>思路1:</h5><p>发送方将数据包加上<code>包头</code>和<code>包尾</code>,<code>包头、包体以及包尾</code>用<code>字典</code>形式包装成<code>json字符串</code>,接收方,通过解析获取<code>json字符串</code>中的包体,便可进行进一步处理.<br>例如:<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line"><span class="comment">// head:包头,body:包体,end:包尾</span></div><div class="line"> <span class="built_in">NSDictionary</span> *dict = @&#123;</div><div class="line">               <span class="string">@"head"</span> : <span class="string">@"phoneNum"</span>,</div><div class="line">               <span class="string">@"body"</span> : @(<span class="number">13133334444</span>),</div><div class="line">               <span class="string">@"end"</span> : @(<span class="number">11</span>)&#125;;</div><div class="line">               &#125;</div></pre></td></tr></table></figure></p>
+<h5 id="思路2"><a href="#思路2" class="headerlink" title="思路2:"></a>思路2:</h5><p>添加前缀.和包内容拼接成同一个字符串.</p>
+<p>  例如:当发送数据是<code>13133334444</code>,如果出现粘包情况只属于<code>完整型</code>:<br><code>13133334444</code><br><code>1313333444413133334444</code><br><code>131333344441313333444413133334444</code>…<br>可以将<code>ab</code>作为前缀.则接收到的数据出现的粘包情况:<br><code>ab13133334444</code><br><code>ab13133334444ab13133334444</code><br><code>ab13133334444ab13133334444ab13133334444</code>…<br>使用<code>componentsSeparatedByString:</code>方法,以ab为分隔符,将每个包内容存入数组中,再取对应数组中的数据操作即可.</p>
+<h5 id="思路3"><a href="#思路3" class="headerlink" title="思路3:"></a>思路3:</h5><p>如果最终要得到的数据的长度是个<code>固定长度</code>,用一个<code>字符串</code>作为<code>缓冲池</code>,每次收到数据,都用<code>字符串</code>拼接对应数据,每当<code>字符串的长度</code>和<code>固定长度</code>相同时,便得到一个<code>完整数据</code>,处理完这个数据并<code>清空字符串</code>,再进行下一轮的<code>字符拼接</code>.</p>
+<p>  例如:处理上面的<code>不完整型</code>.创建一个<code>长度是4</code>的<code>tempData</code>字符串<code>作为</code>数据缓冲池.<code>第1次</code>收到数据,数据是:<code>ab</code>,<code>tempData</code>拼接上<code>ab</code>,<code>tempData</code>中只能再存储2个字符,<code>第2次</code>收到数据,将<code>数据长度</code>和<code>2</code>进行比较,第2次的数据是:<code>cda</code>,截取前两位字符,即<code>cd</code>,<code>tempData</code>继续拼接<code>cd</code>,此时,<code>tempData</code>为<code>abcd</code>,就是我们想要的数据,我们可以处理这个数据,处理之后并清空<code>tempData</code>,将第2次<code>收到数据</code>的<code>剩余数据</code>,即<code>cda</code>中的<code>a</code>,再与<code>tempData</code>拼接.之后,再进行类似操作.</p>
+<p>核心代码<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> 处理数据粘包</div><div class="line"> </div><div class="line"> @param readData 读取到的数据</div><div class="line"> */</div><div class="line">  - (<span class="keyword">void</span>)dealStickPackageWithData:(<span class="built_in">NSString</span> *)readData</div><div class="line">&#123;</div><div class="line">    <span class="comment">// 缓冲池还需要存储的数据个数</span></div><div class="line">    <span class="built_in">NSInteger</span> tempCount;</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> (readData.length &gt; <span class="number">0</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="comment">// 还差tempLength个数填满缓冲池</span></div><div class="line">        tempCount = <span class="number">4</span> - <span class="keyword">self</span>.tempData.length;</div><div class="line">        <span class="keyword">if</span> (readData.length &lt;= tempCount)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">self</span>.tempData = [<span class="keyword">self</span>.tempData stringByAppendingString:readData];</div><div class="line">            </div><div class="line">            <span class="keyword">if</span> (<span class="keyword">self</span>.tempData.length == <span class="number">4</span>)</div><div class="line">            &#123;</div><div class="line">                [<span class="keyword">self</span>.mutArr addObject:<span class="keyword">self</span>.tempData];</div><div class="line">                <span class="keyword">self</span>.tempData = <span class="string">@""</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            <span class="comment">// 下一次的数据个数比要填满缓冲池的数据个数多,一定能拼接成完整数据,剩余的继续</span></div><div class="line">            <span class="keyword">self</span>.tempData = [<span class="keyword">self</span>.tempData stringByAppendingString:[readData substringToIndex:tempCount]];</div><div class="line">            [<span class="keyword">self</span>.mutArr addObject:<span class="keyword">self</span>.tempData];</div><div class="line">            <span class="keyword">self</span>.tempData = <span class="string">@""</span>;</div><div class="line">            </div><div class="line">            <span class="comment">// 多余的再执行一次方法</span></div><div class="line">            [<span class="keyword">self</span> dealStickPackageWithData:[readData substringFromIndex:tempCount]];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>调用<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 存储处理后的每次返回数据</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSMutableArray</span> *mutArr;</div><div class="line"><span class="comment">// 数据缓冲池</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *tempData;</div><div class="line"></div><div class="line">  <span class="comment">/** 第四次测试 -- 混合型**/</span></div><div class="line">    <span class="keyword">self</span>.mutArr = <span class="literal">nil</span>;</div><div class="line">    <span class="comment">/* </span></div><div class="line">     第1次 : abc</div><div class="line">     第2次 : da</div><div class="line">     第3次 : bcdabcd</div><div class="line">     第4次 : abcdabcd</div><div class="line">     第5次 : abcdabcdab</div><div class="line">     */</div><div class="line">    <span class="comment">// 数组中的数据代表每次接收的数据</span></div><div class="line">    <span class="built_in">NSArray</span> *testArr4 = [<span class="built_in">NSArray</span> arrayWithObjects:<span class="string">@"abc"</span>,<span class="string">@"da"</span>,<span class="string">@"bcdabcd"</span>,<span class="string">@"abcdabcd"</span>,<span class="string">@"abcdabcdab"</span>, <span class="literal">nil</span>];</div><div class="line">    <span class="keyword">self</span>.tempData = <span class="string">@""</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="built_in">NSInteger</span> i = <span class="number">0</span>; i &lt; testArr4.count; i++)</div><div class="line">    &#123;</div><div class="line">        [<span class="keyword">self</span> dealStickPackageWithData:testArr4[i]];</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"testArr4 = %@"</span>,<span class="keyword">self</span>.mutArr);</div></pre></td></tr></table></figure></p>
+<p>结果:<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="number">2017</span><span class="number">-06</span><span class="number">-09</span> <span class="number">00</span>:<span class="number">49</span>:<span class="number">12.932976</span>+<span class="number">0800</span> StickPackageDealDemo[<span class="number">10063</span>:<span class="number">3430118</span>] testArr4 = (</div><div class="line">    abcd,</div><div class="line">    abcd,</div><div class="line">    abcd,</div><div class="line">    abcd,</div><div class="line">    abcd,</div><div class="line">    abcd,</div><div class="line">    abcd</div><div class="line">)</div></pre></td></tr></table></figure></p>
+<p>数据粘包处理Demo在文末.</p>
+<h3 id="六-测试"><a href="#六-测试" class="headerlink" title="六.测试."></a>六.测试.</h3><h4 id="1-测试配置"><a href="#1-测试配置" class="headerlink" title="1.测试配置."></a>1.测试配置.</h4><p>测试时,两端需要处于同一WiFi下.客户端中的IP地址为服务端的IP地址,具体信息进入Wifi设置中查看.</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3284707-b5e961ac743ee34a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="IP和端口描述"></p>
+<h4 id="2-测试所需环境"><a href="#2-测试所需环境" class="headerlink" title="2.测试所需环境."></a>2.测试所需环境.</h4><p>将客户端程序安装在每个客户端,让一台服务端测试机和一台客户端测试机连接mac并运行,这两台测试机可以看到打印结果,所有由服务端发送到客户端的数据,通过客户端再回传给服务端,在服务端看打印结果.</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3284707-a8063f5d337291a2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/250" alt="当年的图"></p>
+<h4 id="3-进行延迟差测试"><a href="#3-进行延迟差测试" class="headerlink" title="3.进行延迟差测试."></a>3.进行延迟差测试.</h4><p><code>延迟差</code>即服务端发送数据到<code>第一台客户端</code>和服务端发送数据到<code>最后一台客户端</code>的时间差.根据服务端发送数据给不同数量的客户端进行测试.而且,发送数据时,是随机发送.</p>
+<p>延迟差测试结果:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3284707-d519290042d0b2c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="延迟差测试"></p>
+<p>由图所知,延迟差在200毫秒以内的比例基本保持在99%以上.所以符合开发需求(延迟在200毫秒以内).</p>
+<h4 id="4-单次信息收发测试"><a href="#4-单次信息收发测试" class="headerlink" title="4.单次信息收发测试."></a>4.单次信息收发测试.</h4><p>让服务端给每个客户端随机发送<code>200</code>次数据.并计算服务端发送数据到某一客户端,完整的<code>一次收发时间</code>情况.</p>
+<p>单次信息收发测试结果:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3284707-50b2d85bf6c5534f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="单次信息收发测试"></p>
+<p>由图所知,一次收发时间基本在95%以上,这个时间会根据网络状态和数据包大小波动.不过,可以直观看到数据从服务端到客户端的时间.</p>
+<h3 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub:"></a>GitHub:</h3><p><a href="https://github.com/CherishJoyBy/BYStickPackageDealDemo" target="_blank" rel="external">数据粘包处理Demo</a><br><a href="https://github.com/CherishJoyBy/BYSocketClientDemo" target="_blank" rel="external">CocoaAsyncSocket客户端Demo</a><br><a href="https://github.com/CherishJoyBy/BYSocketServerDemo" target="_blank" rel="external">CocoaAsyncSocket服务端Demo</a><br><a href="https://github.com/CherishJoyBy/BYSocketClientTestDemo" target="_blank" rel="external">CocoaAsyncSocket客户端Demo(含粘包解决和测试)</a><br><a href="https://github.com/CherishJoyBy/BYSocketServerTestDemo" target="_blank" rel="external">CocoaAsyncSocket服务端Demo(含粘包解决和测试)</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/CocoaAsyncSocket/" rel="tag"># CocoaAsyncSocket</a>
+          
+            <a href="/tags/TCP/" rel="tag"># TCP</a>
+          
+            <a href="/tags/粘包/" rel="tag"># 粘包</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/20/iOS和Unity交互之参数传递/" rel="next" title="iOS和Unity交互之参数传递">
+                <i class="fa fa-chevron-left"></i> iOS和Unity交互之参数传递
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/09/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="cherishJoy" />
+          <p class="site-author-name" itemprop="name">cherishJoy</p>
+           
+              <p class="site-description motion-element" itemprop="description">路漫漫其修远兮,吾将上下而求索.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/CherishJoyBy" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/a589d2b37b9c" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-book"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://stackoverflow.com/" title="Stack Overflow" target="_blank">Stack Overflow</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cnblogs.com/" title="博客园" target="_blank">博客园</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.pgyer.com/" title="蒲公英" target="_blank">蒲公英</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://weibo.com/login.php" title="新浪微博" target="_blank">新浪微博</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-CocoaAsyncSocket介绍"><span class="nav-number">1.</span> <span class="nav-text">一.CocoaAsyncSocket介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-下载CocoaAsyncSocket"><span class="nav-number">2.</span> <span class="nav-text">二.下载CocoaAsyncSocket</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#首先-需要到这里下载CocoaAsyncSocket"><span class="nav-number">2.1.</span> <span class="nav-text">首先,需要到这里下载CocoaAsyncSocket.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下载后可以看到文件所在位置"><span class="nav-number">2.2.</span> <span class="nav-text">下载后可以看到文件所在位置.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#这里只要拷贝以下两个文件到项目中"><span class="nav-number">2.3.</span> <span class="nav-text">这里只要拷贝以下两个文件到项目中.</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-客户端"><span class="nav-number">3.</span> <span class="nav-text">三.客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤"><span class="nav-number">3.1.</span> <span class="nav-text">步骤:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-继承GCDAsyncSocketDelegate协议"><span class="nav-number">3.1.1.</span> <span class="nav-text">1.继承GCDAsyncSocketDelegate协议.</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-声明属性"><span class="nav-number">3.1.2.</span> <span class="nav-text">2.声明属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-创建socket并指定代理对象为self-代理队列必须为主队列"><span class="nav-number">3.1.3.</span> <span class="nav-text">3.创建socket并指定代理对象为self,代理队列必须为主队列.</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-连接指定主机的对应端口"><span class="nav-number">3.1.4.</span> <span class="nav-text">4.连接指定主机的对应端口.</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-成功连接主机对应端口号"><span class="nav-number">3.1.5.</span> <span class="nav-text">5.成功连接主机对应端口号.</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-发送数据给服务端"><span class="nav-number">3.1.6.</span> <span class="nav-text">6.发送数据给服务端</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-读取服务端数据"><span class="nav-number">3.1.7.</span> <span class="nav-text">7.读取服务端数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-客户端socket断开连接"><span class="nav-number">3.1.8.</span> <span class="nav-text">8.客户端socket断开连接.</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-建立心跳连接"><span class="nav-number">3.1.9.</span> <span class="nav-text">9.建立心跳连接.</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-服务端"><span class="nav-number">4.</span> <span class="nav-text">四.服务端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤-1"><span class="nav-number">4.1.</span> <span class="nav-text">步骤:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-继承GCDAsyncSocketDelegate协议-1"><span class="nav-number">4.1.1.</span> <span class="nav-text">1.继承GCDAsyncSocketDelegate协议.</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-声明属性-1"><span class="nav-number">4.1.2.</span> <span class="nav-text">2.声明属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-创建socket并指定代理对象为self-代理队列必须为主队列-1"><span class="nav-number">4.1.3.</span> <span class="nav-text">3.创建socket并指定代理对象为self,代理队列必须为主队列.</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-开放服务端的指定端口"><span class="nav-number">4.1.4.</span> <span class="nav-text">4.开放服务端的指定端口.</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-连接上新的客户端socket"><span class="nav-number">4.1.5.</span> <span class="nav-text">5.连接上新的客户端socket</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-发送数据给客户端"><span class="nav-number">4.1.6.</span> <span class="nav-text">6.发送数据给客户端</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-读取客户端的数据"><span class="nav-number">4.1.7.</span> <span class="nav-text">7.读取客户端的数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-建立检测心跳连接"><span class="nav-number">4.1.8.</span> <span class="nav-text">8.建立检测心跳连接.</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五-数据粘包处理"><span class="nav-number">5.</span> <span class="nav-text">五.数据粘包处理.</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-粘包情况"><span class="nav-number">5.1.</span> <span class="nav-text">1.粘包情况.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-粘包解决思路"><span class="nav-number">5.2.</span> <span class="nav-text">2.粘包解决思路.</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#思路1"><span class="nav-number">5.2.1.</span> <span class="nav-text">思路1:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路2"><span class="nav-number">5.2.2.</span> <span class="nav-text">思路2:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路3"><span class="nav-number">5.2.3.</span> <span class="nav-text">思路3:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六-测试"><span class="nav-number">6.</span> <span class="nav-text">六.测试.</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-测试配置"><span class="nav-number">6.1.</span> <span class="nav-text">1.测试配置.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-测试所需环境"><span class="nav-number">6.2.</span> <span class="nav-text">2.测试所需环境.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-进行延迟差测试"><span class="nav-number">6.3.</span> <span class="nav-text">3.进行延迟差测试.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-单次信息收发测试"><span class="nav-number">6.4.</span> <span class="nav-text">4.单次信息收发测试.</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub"><span class="nav-number">7.</span> <span class="nav-text">GitHub:</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cherishJoy</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("hUIOauAOSIOYuI73o8R3vTsa-gzGzoHsz", "DFndnSRESYTVrekVyCxuuzSM");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
