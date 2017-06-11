@@ -1,0 +1,1482 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,App上架," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="本文主要介绍了App上架流程,以及上架过程中会遇到的一些问题.  一.App上架前的准备.上架前,需要开发人员有苹果开发者账号,具体请阅读苹果开发者账号注册申请流程.本文是在已经拥有开发者账号的前提下而开展的.  二.登陆苹果开发者官网.1.进入苹果开发者官网. 2.点击Acount. 3.输入开发者账号,点击Sign in(登陆)  三.生成发布证书1.点击Certifcates,Identi">
+<meta name="keywords" content="iOS,App上架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS开发之App上架流程(2017)">
+<meta property="og:url" content="http://cherishJoy.com/2017/05/17/iOS开发之App上架流程(2017)/index.html">
+<meta property="og:site_name" content="CherishJoy">
+<meta property="og:description" content="本文主要介绍了App上架流程,以及上架过程中会遇到的一些问题.  一.App上架前的准备.上架前,需要开发人员有苹果开发者账号,具体请阅读苹果开发者账号注册申请流程.本文是在已经拥有开发者账号的前提下而开展的.  二.登陆苹果开发者官网.1.进入苹果开发者官网. 2.点击Acount. 3.输入开发者账号,点击Sign in(登陆)  三.生成发布证书1.点击Certifcates,Identi">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-88bcbd34c0655165.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-a13fc86e25d1f120.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-28be2c0a321307e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-56ac226fb4391d06.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-3611a09fc4ae421a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-944e67f72e5a378e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-3e47f29920dfa132.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-570399013777b51a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-3f9fe6a941e00e8f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-2d2d31748777b1d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-d785e8153cd6944c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-1e6f2169f9127eee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-74b746d940be0e86.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-96e5b6bcb10c476e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-6802569d889c6613.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-b74247997ed41077.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-5ec19c8fc0b20588.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-52cd5e00cc7a71e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-9abf84f1e0e68d9d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-a3cc1dc056fecf85.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-fea30f94e5b266d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-b5cebd0e0d89dcff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-868fea691150401c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-ecba916d579c9bef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-35911e2e214f1a02.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-3bfa8dc804aa4c2e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-51d6de60da450dcb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-dc3060fa51c742b2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-45ea554935f9e633.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-38f1dc93f67b90d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-24eea2dc333ec0a3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-c70436bf2f9b5d4c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-fcc51a2da2cee825.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-610e9270495b2511.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-c30006fefaaa7099.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-ff2e02db8c0e9348.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-7f80894530c3607f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-5ae90c3362a81834.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-b53553ddaf592113.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-7235107e238f52c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-b0f851387e989d72.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-0670b4decd551269.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-ab933a70e1515067.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-478c55ac975f6296.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-141d9889ee241f0a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-27954b61205eb33e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-b971340b2aac2b90.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-4cdf11cde468104f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-63b663721fc2eee9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-06078cf5a09e787e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-c3eaca06427cce24.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-85ae6b3a36a9d0a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-b3eafa382a5b2411.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-98a5700a314b417a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-20548d16d383170b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-22023ec88ace1d6d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-46d5a5007e94cf6b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-b86c07b0f731195d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-d78e501c26d8bfb7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-872e71252f8e3530.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-1a32bb7ae10eb8f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-44e62ef6f9dbf1a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-d6035c68609ed2ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-c1fb8d5aa36a0d51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-bf2200c4f33da8e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-15c28b2111b7fc5e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-4162937eb9ec015e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-57e2eccecc4a47b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-fb60e68702fe2d01.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-06db1dba6070dfc1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-f2738dd1ee04d4e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-daea367bb4498b9a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-3025b9885ed3f124.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-202ccdba77f290b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:updated_time" content="2017-06-11T07:25:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS开发之App上架流程(2017)">
+<meta name="twitter:description" content="本文主要介绍了App上架流程,以及上架过程中会遇到的一些问题.  一.App上架前的准备.上架前,需要开发人员有苹果开发者账号,具体请阅读苹果开发者账号注册申请流程.本文是在已经拥有开发者账号的前提下而开展的.  二.登陆苹果开发者官网.1.进入苹果开发者官网. 2.点击Acount. 3.输入开发者账号,点击Sign in(登陆)  三.生成发布证书1.点击Certifcates,Identi">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/3284707-88bcbd34c0655165.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://cherishJoy.com/2017/05/17/iOS开发之App上架流程(2017)/"/>
+
+
+
+
+
+  <title>iOS开发之App上架流程(2017) | CherishJoy</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CherishJoy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://cherishJoy.com/2017/05/17/iOS开发之App上架流程(2017)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cherishJoy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CherishJoy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS开发之App上架流程(2017)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-17T15:12:01+08:00">
+                2017-05-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categorys/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/05/17/iOS开发之App上架流程(2017)/" class="leancloud_visitors" data-flag-title="iOS开发之App上架流程(2017)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,533
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本文主要介绍了App上架流程,以及上架过程中会遇到的一些问题.</p>
+</blockquote>
+<h3 id="一-App上架前的准备"><a href="#一-App上架前的准备" class="headerlink" title="一.App上架前的准备."></a>一.App上架前的准备.</h3><p>上架前,需要开发人员有苹果开发者账号,具体请阅读<a href="http://www.jianshu.com/p/e8f0830c21dd" target="_blank" rel="external">苹果开发者账号注册申请流程</a>.本文是在已经拥有开发者账号的前提下而开展的.</p>
+<hr>
+<h3 id="二-登陆苹果开发者官网"><a href="#二-登陆苹果开发者官网" class="headerlink" title="二.登陆苹果开发者官网."></a>二.登陆苹果开发者官网.</h3><h4 id="1-进入苹果开发者官网"><a href="#1-进入苹果开发者官网" class="headerlink" title="1.进入苹果开发者官网."></a>1.进入<a href="https://developer.apple.com/" target="_blank" rel="external">苹果开发者官网</a>.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-88bcbd34c0655165.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="苹果开发者官网"></p>
+<h4 id="2-点击Acount"><a href="#2-点击Acount" class="headerlink" title="2.点击Acount."></a>2.点击Acount.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-a13fc86e25d1f120.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="登陆界面"></p>
+<h4 id="3-输入开发者账号-点击Sign-in-登陆"><a href="#3-输入开发者账号-点击Sign-in-登陆" class="headerlink" title="3.输入开发者账号,点击Sign in(登陆)"></a>3.输入开发者账号,点击Sign in(登陆)</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-28be2c0a321307e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="输入账号密码"></p>
+<hr>
+<h3 id="三-生成发布证书"><a href="#三-生成发布证书" class="headerlink" title="三.生成发布证书"></a>三.生成发布证书</h3><h4 id="1-点击Certifcates-Identifiers-amp-Profiles-证书-id-配置"><a href="#1-点击Certifcates-Identifiers-amp-Profiles-证书-id-配置" class="headerlink" title="1.点击Certifcates,Identifiers &amp; Profiles(证书,id,配置)"></a>1.点击Certifcates,Identifiers &amp; Profiles(证书,id,配置)</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-56ac226fb4391d06.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="点击证书"></p>
+<h4 id="2-点击All-再点击”-”号-添加发布证书"><a href="#2-点击All-再点击”-”号-添加发布证书" class="headerlink" title="2.点击All,再点击”+”号,添加发布证书."></a>2.点击All,再点击”+”号,添加发布证书.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-3611a09fc4ae421a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="添加发布证书"></p>
+<h4 id="3-选择App-Store-and-Ad-Hoc-之后continue"><a href="#3-选择App-Store-and-Ad-Hoc-之后continue" class="headerlink" title="3.选择App Store and Ad Hoc.之后continue."></a>3.选择App Store and Ad Hoc.之后continue.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-944e67f72e5a378e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="选择App Store and Ad Hoc"></p>
+<h4 id="4-还是continue"><a href="#4-还是continue" class="headerlink" title="4.还是continue."></a>4.还是continue.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-3e47f29920dfa132.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="创建CSR文件"></p>
+<h4 id="5-这里需要选择CSR文件"><a href="#5-这里需要选择CSR文件" class="headerlink" title="5.这里需要选择CSR文件."></a>5.这里需要选择CSR文件.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-570399013777b51a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="选择CSR文件"></p>
+<h4 id="6-打开钥匙串-钥匙串在Launchpad的Other文件夹中"><a href="#6-打开钥匙串-钥匙串在Launchpad的Other文件夹中" class="headerlink" title="6.打开钥匙串,钥匙串在Launchpad的Other文件夹中"></a>6.打开钥匙串,钥匙串在Launchpad的Other文件夹中</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-3f9fe6a941e00e8f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="Launchpad"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3284707-2d2d31748777b1d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="Other文件夹"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3284707-d785e8153cd6944c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="钥匙串访问"></p>
+<h4 id="7-点击钥匙串访问-gt-证书助理-gt-从证书颁发机构请求证书"><a href="#7-点击钥匙串访问-gt-证书助理-gt-从证书颁发机构请求证书" class="headerlink" title="7.点击钥匙串访问 -&gt; 证书助理 -&gt;从证书颁发机构请求证书."></a>7.点击钥匙串访问 -&gt; 证书助理 -&gt;从证书颁发机构请求证书.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-1e6f2169f9127eee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="钥匙串"></p>
+<h4 id="8-电子邮件地址随意填写-邮箱常用名可不填-存储到磁盘"><a href="#8-电子邮件地址随意填写-邮箱常用名可不填-存储到磁盘" class="headerlink" title="8.电子邮件地址随意填写,邮箱常用名可不填,存储到磁盘."></a>8.电子邮件地址随意填写,邮箱常用名可不填,存储到磁盘.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-74b746d940be0e86.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="证书信息"></p>
+<h4 id="9-存储在磁盘上的CSR文件"><a href="#9-存储在磁盘上的CSR文件" class="headerlink" title="9.存储在磁盘上的CSR文件"></a>9.存储在磁盘上的CSR文件</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-96e5b6bcb10c476e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="生成的CSR文件"></p>
+<h4 id="10-将CSR上传苹果服务器"><a href="#10-将CSR上传苹果服务器" class="headerlink" title="10.将CSR上传苹果服务器"></a>10.将CSR上传苹果服务器</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-6802569d889c6613.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="CSR上传苹果服务器"></p>
+<h4 id="11-点击Download下载CER文件-保存并双击运行-运行完成后-点击Done"><a href="#11-点击Download下载CER文件-保存并双击运行-运行完成后-点击Done" class="headerlink" title="11.点击Download下载CER文件,保存并双击运行,运行完成后,点击Done."></a>11.点击Download下载CER文件,保存并双击运行,运行完成后,点击Done.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-b74247997ed41077.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="下载CSR文件"></p>
+<h4 id="12-运行之后-在钥匙串里生成证书-确保证书有效"><a href="#12-运行之后-在钥匙串里生成证书-确保证书有效" class="headerlink" title="12.运行之后,在钥匙串里生成证书,确保证书有效."></a>12.运行之后,在钥匙串里生成证书,确保证书有效.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-5ec19c8fc0b20588.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="钥匙串访问"></p>
+<hr>
+<h3 id="四-创建App-IDs并绑定App的Bundle-Identifier"><a href="#四-创建App-IDs并绑定App的Bundle-Identifier" class="headerlink" title="四.创建App IDs并绑定App的Bundle Identifier"></a>四.创建App IDs并绑定App的Bundle Identifier</h3><h4 id="1-点击App-IDs-点击”-”号"><a href="#1-点击App-IDs-点击”-”号" class="headerlink" title="1.点击App IDs,点击”+”号."></a>1.点击App IDs,点击”+”号.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-52cd5e00cc7a71e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="添加AppID"></p>
+<h4 id="2-填写AppID-和-Bundle-Identifier-name可以根据公司项目名来填写-日期只是为了标记这个App-ID创建的时间-建议填写-Bundle-Identifier则为项目的Bundle-ID"><a href="#2-填写AppID-和-Bundle-Identifier-name可以根据公司项目名来填写-日期只是为了标记这个App-ID创建的时间-建议填写-Bundle-Identifier则为项目的Bundle-ID" class="headerlink" title="2.填写AppID 和 Bundle Identifier,name可以根据公司项目名来填写,日期只是为了标记这个App ID创建的时间.建议填写.Bundle Identifier则为项目的Bundle ID."></a>2.填写AppID 和 Bundle Identifier,name可以根据公司项目名来填写,日期只是为了标记这个App ID创建的时间.建议填写.Bundle Identifier则为项目的Bundle ID.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-9abf84f1e0e68d9d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="添加AppID和Bundle Identifier"></p>
+<h4 id="3-选择App-Services-默认为两项-根据具体需求选择-点击continue完成创建"><a href="#3-选择App-Services-默认为两项-根据具体需求选择-点击continue完成创建" class="headerlink" title="3.选择App Services,默认为两项,(根据具体需求选择),点击continue完成创建."></a>3.选择App Services,默认为两项,(根据具体需求选择),点击continue完成创建.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-a3cc1dc056fecf85.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="App Services"></p>
+<h4 id="4-点击Register"><a href="#4-点击Register" class="headerlink" title="4.点击Register"></a>4.点击Register</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-fea30f94e5b266d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="App ID描述"></p>
+<h4 id="5-点击Done"><a href="#5-点击Done" class="headerlink" title="5.点击Done"></a>5.点击Done</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-b5cebd0e0d89dcff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="点击Done"></p>
+<h4 id="6-注册成功后内容"><a href="#6-注册成功后内容" class="headerlink" title="6.注册成功后内容"></a>6.注册成功后内容</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-868fea691150401c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="App ID"></p>
+<p>注意:<br>1.上传App所用的Bundle Identifier为英文 + 数字的组合,而且是固定的,不能使用占位符和特殊符号.<br>2.如果工程中的Bundle Identifier改变,则开发者账号中添加的App ID需要重新绑定.</p>
+<hr>
+<h3 id="五-生成描述文件"><a href="#五-生成描述文件" class="headerlink" title="五.生成描述文件"></a>五.生成描述文件</h3><h4 id="1-描述文件是描述哪台电脑能对哪个Bundle-Identifier的工程进行打包测试或发布-点击Provisioning-Profiles-点击All-再点击右上角”-”号"><a href="#1-描述文件是描述哪台电脑能对哪个Bundle-Identifier的工程进行打包测试或发布-点击Provisioning-Profiles-点击All-再点击右上角”-”号" class="headerlink" title="1.描述文件是描述哪台电脑能对哪个Bundle Identifier的工程进行打包测试或发布.点击Provisioning Profiles,点击All,再点击右上角”+”号."></a>1.描述文件是描述哪台电脑能对哪个Bundle Identifier的工程进行打包测试或发布.点击Provisioning Profiles,点击All,再点击右上角”+”号.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-ecba916d579c9bef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="生成Provisioning Profile"></p>
+<h4 id="2-如果是发布-选择App-Store这个描述文件-英译为-创建发布描述文件以提交你的app到App-Store"><a href="#2-如果是发布-选择App-Store这个描述文件-英译为-创建发布描述文件以提交你的app到App-Store" class="headerlink" title="2.如果是发布,选择App Store这个描述文件,英译为:创建发布描述文件以提交你的app到App Store;"></a>2.如果是发布,选择App Store这个描述文件,英译为:创建发布描述文件以提交你的app到App Store;</h4><p>如果仅是安装到不同手机上进行测试,选择Ad Hoc,英译为:创建发布描述文件以安装你的app到已经注册的设备上(注册的设备上限为100台),点击Continue.</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3284707-35911e2e214f1a02.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="描述文件选择"></p>
+<h4 id="3-在App-ID这个选项栏里面找到你刚刚创建的-App-ID-点击Continue"><a href="#3-在App-ID这个选项栏里面找到你刚刚创建的-App-ID-点击Continue" class="headerlink" title="3.在App ID这个选项栏里面找到你刚刚创建的:App ID,点击Continue."></a>3.在App ID这个选项栏里面找到你刚刚创建的:App ID,点击Continue.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-3bfa8dc804aa4c2e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="App ID选择"></p>
+<h4 id="4-选择你刚创建的发布证书，根据自己电脑上的发布证书日期来选择，点击Continue"><a href="#4-选择你刚创建的发布证书，根据自己电脑上的发布证书日期来选择，点击Continue" class="headerlink" title="4.选择你刚创建的发布证书，根据自己电脑上的发布证书日期来选择，点击Continue."></a>4.选择你刚创建的发布证书，根据自己电脑上的发布证书日期来选择，点击Continue.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-51d6de60da450dcb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="选择发布证书"></p>
+<h4 id="5-在Profile-Name栏里输入一个名称-这个是Provisioning-Profile-简称PP文件-文件的名称-可随便输入-文件名后缀可带上日期-方便以后使用-然后点击Continue"><a href="#5-在Profile-Name栏里输入一个名称-这个是Provisioning-Profile-简称PP文件-文件的名称-可随便输入-文件名后缀可带上日期-方便以后使用-然后点击Continue" class="headerlink" title="5.在Profile Name栏里输入一个名称,这个是Provisioning Profile(简称PP文件)文件的名称,可随便输入,文件名后缀可带上日期,方便以后使用.然后点击Continue."></a>5.在Profile Name栏里输入一个名称,这个是Provisioning Profile(简称PP文件)文件的名称,可随便输入,文件名后缀可带上日期,方便以后使用.然后点击Continue.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-dc3060fa51c742b2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="添加Provisioning Profile名称"></p>
+<h4 id="6-Download文件-并双击运行-点击done完成"><a href="#6-Download文件-并双击运行-点击done完成" class="headerlink" title="6.Download文件,并双击运行,点击done完成."></a>6.Download文件,并双击运行,点击done完成.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-45ea554935f9e633.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="Download PP文件"></p>
+<h4 id="7-Download生成的PPFile"><a href="#7-Download生成的PPFile" class="headerlink" title="7.Download生成的PPFile."></a>7.Download生成的PPFile.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-38f1dc93f67b90d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="生成的PP文件"></p>
+<hr>
+<h3 id="六-在iTunes-Connect中添加上传App信息并提交到Appstore"><a href="#六-在iTunes-Connect中添加上传App信息并提交到Appstore" class="headerlink" title="六.在iTunes Connect中添加上传App信息并提交到Appstore."></a>六.在iTunes Connect中添加上传App信息并提交到Appstore.</h3><h4 id="1-用开发者账号登陆iTunes-Connect"><a href="#1-用开发者账号登陆iTunes-Connect" class="headerlink" title="1.用开发者账号登陆iTunes Connect."></a>1.用开发者账号登陆<a href="https://itunesconnect.apple.com/login" target="_blank" rel="external">iTunes Connect</a>.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-24eea2dc333ec0a3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="iTunes Connect"></p>
+<h4 id="2-点击我的App"><a href="#2-点击我的App" class="headerlink" title="2.点击我的App"></a>2.点击我的App</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-c70436bf2f9b5d4c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="我的App"></p>
+<h4 id="3-点击”-”号-然后新建App"><a href="#3-点击”-”号-然后新建App" class="headerlink" title="3.点击”+”号,然后新建App."></a>3.点击”+”号,然后新建App.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-fcc51a2da2cee825.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="新建App"></p>
+<h4 id="4-按要求填写信息-SKU是公司用于做统计数据之类的id，根据公司需求填写"><a href="#4-按要求填写信息-SKU是公司用于做统计数据之类的id，根据公司需求填写" class="headerlink" title="4.按要求填写信息,SKU是公司用于做统计数据之类的id，根据公司需求填写"></a>4.按要求填写信息,SKU是公司用于做统计数据之类的id，根据公司需求填写</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-610e9270495b2511.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="App信心"></p>
+<h4 id="5-每个描述后面的-号是苹果提供的提示"><a href="#5-每个描述后面的-号是苹果提供的提示" class="headerlink" title="5.每个描述后面的?号是苹果提供的提示"></a>5.每个描述后面的?号是苹果提供的提示</h4><p>平台:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3284707-c30006fefaaa7099.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="平台"></p>
+<p>名称:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3284707-ff2e02db8c0e9348.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="名称"></p>
+<p>语言:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3284707-7f80894530c3607f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="语言"></p>
+<p>套装ID:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3284707-5ae90c3362a81834.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="套装ID"></p>
+<p>SKU:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3284707-b53553ddaf592113.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="SKU"></p>
+<h4 id="6-填写App名称、套装ID、类别-分级位置显示-无分级-具体分级需要在后面填写"><a href="#6-填写App名称、套装ID、类别-分级位置显示-无分级-具体分级需要在后面填写" class="headerlink" title="6.填写App名称、套装ID、类别.分级位置显示:无分级.具体分级需要在后面填写."></a>6.填写App名称、套装ID、类别.分级位置显示:无分级.具体分级需要在后面填写.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-7235107e238f52c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="App具体信息"></p>
+<h4 id="7-填写价格、销售范围、批量购买计划"><a href="#7-填写价格、销售范围、批量购买计划" class="headerlink" title="7.填写价格、销售范围、批量购买计划."></a>7.填写价格、销售范围、批量购买计划.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-b0f851387e989d72.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="价格、销售信息"></p>
+<h4 id="8-需要3-5寸、4寸、4-7寸、5-5寸预览图片-每个尺寸都要至少3张"><a href="#8-需要3-5寸、4寸、4-7寸、5-5寸预览图片-每个尺寸都要至少3张" class="headerlink" title="8.需要3.5寸、4寸、4.7寸、5.5寸预览图片,每个尺寸都要至少3张."></a>8.需要3.5寸、4寸、4.7寸、5.5寸预览图片,每个尺寸都要至少3张.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-0670b4decd551269.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="App预览图"></p>
+<p>3.5寸:640 x 960</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3284707-ab933a70e1515067.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="3.5寸"></p>
+<p>4寸:640 x 1136</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3284707-478c55ac975f6296.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="4寸"></p>
+<p>4.7寸:750 x 1334</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3284707-141d9889ee241f0a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="4.7寸"></p>
+<p>5.5寸:1242 x 2208</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3284707-27954b61205eb33e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="5.5寸"></p>
+<h4 id="9-App的描述根据公司需求填写-如果App名称为”XX助手”-关键词可以写-”XX、助手、XX助手”-关键词主要是为了让用户在AppStore上搜索应用时-能通过对应关键词能找到匹配的App"><a href="#9-App的描述根据公司需求填写-如果App名称为”XX助手”-关键词可以写-”XX、助手、XX助手”-关键词主要是为了让用户在AppStore上搜索应用时-能通过对应关键词能找到匹配的App" class="headerlink" title="9.App的描述根据公司需求填写,如果App名称为”XX助手”,关键词可以写:”XX、助手、XX助手”,关键词主要是为了让用户在AppStore上搜索应用时,能通过对应关键词能找到匹配的App."></a>9.App的描述根据公司需求填写,如果App名称为”XX助手”,关键词可以写:”XX、助手、XX助手”,关键词主要是为了让用户在AppStore上搜索应用时,能通过对应关键词能找到匹配的App.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-b971340b2aac2b90.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="XX助手"></p>
+<h4 id="10-iMessage-App图中已经说明很清楚-一般不用处理"><a href="#10-iMessage-App图中已经说明很清楚-一般不用处理" class="headerlink" title="10.iMessage App图中已经说明很清楚,一般不用处理"></a>10.iMessage App图中已经说明很清楚,一般不用处理</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-4cdf11cde468104f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="iMessage"></p>
+<h4 id="11-填写App图标"><a href="#11-填写App图标" class="headerlink" title="11.填写App图标"></a>11.填写App图标</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-63b663721fc2eee9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="App图标"></p>
+<h4 id="12-分级填写-如图分级定为17-如果想要4-无限制的网络访问改为否"><a href="#12-分级填写-如图分级定为17-如果想要4-无限制的网络访问改为否" class="headerlink" title="12.分级填写,如图分级定为17+,如果想要4+,无限制的网络访问改为否."></a>12.分级填写,如图分级定为17+,如果想要4+,无限制的网络访问改为否.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-06078cf5a09e787e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="分级填写"></p>
+<h4 id="13-如果XX助手App涉及和带有蓝牙的硬件连接-需要上传App和硬件使用操作的视频演示地址-我上传的是优酷-只要是App和硬件进行交互-就需要有App操作视频演示地址"><a href="#13-如果XX助手App涉及和带有蓝牙的硬件连接-需要上传App和硬件使用操作的视频演示地址-我上传的是优酷-只要是App和硬件进行交互-就需要有App操作视频演示地址" class="headerlink" title="13.如果XX助手App涉及和带有蓝牙的硬件连接,需要上传App和硬件使用操作的视频演示地址,我上传的是优酷.(只要是App和硬件进行交互,就需要有App操作视频演示地址)"></a>13.如果XX助手App涉及和带有蓝牙的硬件连接,需要上传App和硬件使用操作的视频演示地址,我上传的是优酷.(只要是App和硬件进行交互,就需要有App操作视频演示地址)</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-c3eaca06427cce24.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="XX助手审核信息"></p>
+<h4 id="14-Apple-Watch图中也说明很清楚-一般不用处理"><a href="#14-Apple-Watch图中也说明很清楚-一般不用处理" class="headerlink" title="14.Apple Watch图中也说明很清楚,一般不用处理."></a>14.Apple Watch图中也说明很清楚,一般不用处理.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-85ae6b3a36a9d0a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="Apple Watch图标"></p>
+<hr>
+<h3 id="七-xcode打包项目"><a href="#七-xcode打包项目" class="headerlink" title="七.xcode打包项目"></a>七.xcode打包项目</h3><h4 id="1-构建版本-需要到Xcode中去打包"><a href="#1-构建版本-需要到Xcode中去打包" class="headerlink" title="1.构建版本,需要到Xcode中去打包."></a>1.构建版本,需要到Xcode中去打包.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-b3eafa382a5b2411.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="构建版本"></p>
+<h4 id="2-版本选择的问题"><a href="#2-版本选择的问题" class="headerlink" title="2.版本选择的问题"></a>2.版本选择的问题</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-98a5700a314b417a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="版本选择"></p>
+<h4 id="3-打开Xcode-设备选择Generic-iOS-Device-然后使用快捷键Command-B-进行编译-下图中有一些简单说明"><a href="#3-打开Xcode-设备选择Generic-iOS-Device-然后使用快捷键Command-B-进行编译-下图中有一些简单说明" class="headerlink" title="3.打开Xcode,设备选择Generic iOS Device.然后使用快捷键Command + B,进行编译.下图中有一些简单说明"></a>3.打开Xcode,设备选择Generic iOS Device.然后使用快捷键Command + B,进行编译.下图中有一些简单说明</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-20548d16d383170b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="配置说明"></p>
+<h4 id="4-选择Product-gt-Scheme-gt-Edit-Scheme-或者使用快捷键Command-lt-打开界面"><a href="#4-选择Product-gt-Scheme-gt-Edit-Scheme-或者使用快捷键Command-lt-打开界面" class="headerlink" title="4.选择Product -&gt; Scheme -&gt; Edit Scheme 或者使用快捷键Command + &lt; ,打开界面."></a>4.选择Product -&gt; Scheme -&gt; Edit Scheme 或者使用快捷键Command + &lt; ,打开界面.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-22023ec88ace1d6d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="Edit Scheme"></p>
+<h4 id="5-把Run、Test、Profile、Analyze、Archive中的Build-Configuration全部改为Release-之后Close"><a href="#5-把Run、Test、Profile、Analyze、Archive中的Build-Configuration全部改为Release-之后Close" class="headerlink" title="5.把Run、Test、Profile、Analyze、Archive中的Build Configuration全部改为Release.之后Close."></a>5.把Run、Test、Profile、Analyze、Archive中的Build Configuration全部改为Release.之后Close.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-46d5a5007e94cf6b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="修改为Release的位置"></p>
+<h4 id="6-编译成功-选择Product-gt-Archive-进行打包"><a href="#6-编译成功-选择Product-gt-Archive-进行打包" class="headerlink" title="6.编译成功,选择Product -&gt; Archive.进行打包."></a>6.编译成功,选择Product -&gt; Archive.进行打包.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-b86c07b0f731195d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="Archive"></p>
+<h4 id="7-打包后弹窗-上传给苹果团队进行测试的包不能带有iPhone等字样-因为-苹果对打包的文件名称有要求-所以-我把”Unity-iPhone”改了"><a href="#7-打包后弹窗-上传给苹果团队进行测试的包不能带有iPhone等字样-因为-苹果对打包的文件名称有要求-所以-我把”Unity-iPhone”改了" class="headerlink" title="7.打包后弹窗,上传给苹果团队进行测试的包不能带有iPhone等字样,因为,苹果对打包的文件名称有要求.所以,我把”Unity-iPhone”改了."></a>7.打包后弹窗,上传给苹果团队进行测试的包不能带有iPhone等字样,因为,苹果对打包的文件名称有要求.所以,我把”Unity-iPhone”改了.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-d78e501c26d8bfb7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="打包的文件名"></p>
+<h4 id="8-选择Validate进行验证-再Choose对应的付费过的开发者团队"><a href="#8-选择Validate进行验证-再Choose对应的付费过的开发者团队" class="headerlink" title="8.选择Validate进行验证,再Choose对应的付费过的开发者团队."></a>8.选择Validate进行验证,再Choose对应的付费过的开发者团队.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-872e71252f8e3530.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="Validate"></p>
+<h4 id="9-点击Validate"><a href="#9-点击Validate" class="headerlink" title="9.点击Validate"></a>9.点击Validate</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-1a32bb7ae10eb8f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="点击Validate"></p>
+<h4 id="10-等待验证结果"><a href="#10-等待验证结果" class="headerlink" title="10.等待验证结果"></a>10.等待验证结果</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-44e62ef6f9dbf1a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="等待验证"></p>
+<h4 id="11-验证失败-点击done-因为之前已经出现build为3的版本-所以-将build改为4-从步骤-五-6-再走一次流程-如果没错则继续"><a href="#11-验证失败-点击done-因为之前已经出现build为3的版本-所以-将build改为4-从步骤-五-6-再走一次流程-如果没错则继续" class="headerlink" title="11.验证失败,点击done.因为之前已经出现build为3的版本,所以,将build改为4,从步骤(五.6)再走一次流程.如果没错则继续."></a>11.验证失败,点击done.因为之前已经出现build为3的版本,所以,将build改为4,从步骤(五.6)再走一次流程.如果没错则继续.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-d6035c68609ed2ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="验证失败"></p>
+<h4 id="12-验证成功-如下-选择done"><a href="#12-验证成功-如下-选择done" class="headerlink" title="12.验证成功,如下,选择done."></a>12.验证成功,如下,选择done.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-c1fb8d5aa36a0d51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="验证成功"></p>
+<h4 id="13-选择Upload-to-App-Store-弹窗后还是选择付费的开发者团队"><a href="#13-选择Upload-to-App-Store-弹窗后还是选择付费的开发者团队" class="headerlink" title="13.选择Upload to App Store,弹窗后还是选择付费的开发者团队."></a>13.选择Upload to App Store,弹窗后还是选择付费的开发者团队.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-bf2200c4f33da8e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="Upload to App Store"></p>
+<h4 id="14-选择Upload"><a href="#14-选择Upload" class="headerlink" title="14.选择Upload"></a>14.选择Upload</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-15c28b2111b7fc5e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="Upload"></p>
+<h4 id="15-等待上传"><a href="#15-等待上传" class="headerlink" title="15.等待上传"></a>15.等待上传</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-4162937eb9ec015e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="等待上传"></p>
+<h4 id="16-上传中"><a href="#16-上传中" class="headerlink" title="16.上传中"></a>16.上传中</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-57e2eccecc4a47b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="上传中"></p>
+<h4 id="17-上传成功"><a href="#17-上传成功" class="headerlink" title="17.上传成功"></a>17.上传成功</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-fb60e68702fe2d01.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="上传成功"></p>
+<h4 id="18-返回到iTunes-Connect网站中-我的App-gt-准备提交-gt-选择构建版本右侧的”-”号"><a href="#18-返回到iTunes-Connect网站中-我的App-gt-准备提交-gt-选择构建版本右侧的”-”号" class="headerlink" title="18.返回到iTunes Connect网站中,我的App -&gt; 准备提交 -&gt; 选择构建版本右侧的”+”号."></a>18.返回到iTunes Connect网站中,我的App -&gt; 准备提交 -&gt; 选择构建版本右侧的”+”号.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-06db1dba6070dfc1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="添加构建版本"></p>
+<h4 id="19-选择构建版本-点击完成"><a href="#19-选择构建版本-点击完成" class="headerlink" title="19.选择构建版本,点击完成."></a>19.选择构建版本,点击完成.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-f2738dd1ee04d4e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="选择构建版本"></p>
+<h4 id="20-提交审核"><a href="#20-提交审核" class="headerlink" title="20.提交审核."></a>20.提交审核.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-daea367bb4498b9a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="提交审核"></p>
+<h4 id="21-出现广告标识-根据情况填写-再提交"><a href="#21-出现广告标识-根据情况填写-再提交" class="headerlink" title="21.出现广告标识,根据情况填写,再提交."></a>21.出现广告标识,根据情况填写,再提交.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-3025b9885ed3f124.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="广告表示符"></p>
+<h4 id="22-App等待审核"><a href="#22-App等待审核" class="headerlink" title="22.App等待审核."></a>22.App等待审核.</h4><p><img src="http://upload-images.jianshu.io/upload_images/3284707-202ccdba77f290b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="等待审核"></p>
+<h3 id="CSDN"><a href="#CSDN" class="headerlink" title="CSDN"></a>CSDN</h3><p><a href="http://blog.csdn.net/cherish_joy/article/details/72628809" target="_blank" rel="external">iOS开发 – App上架流程(2017)</a></p>
+<h3 id="简书"><a href="#简书" class="headerlink" title="简书"></a>简书</h3><p><a href="http://www.jianshu.com/p/440ea5a2bb54" target="_blank" rel="external">iOS开发之 App上架流程(2017)</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/App上架/" rel="tag"># App上架</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/16/iOS开发之苹果开发者账号注册申请流程/" rel="next" title="iOS开发之苹果开发者账号注册申请流程">
+                <i class="fa fa-chevron-left"></i> iOS开发之苹果开发者账号注册申请流程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/24/iOS和Unity交互之界面跳转/" rel="prev" title="iOS和Unity交互之界面跳转">
+                iOS和Unity交互之界面跳转 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="cherishJoy" />
+          <p class="site-author-name" itemprop="name">cherishJoy</p>
+           
+              <p class="site-description motion-element" itemprop="description">路漫漫其修远兮,吾将上下而求索.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/CherishJoyBy" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/a589d2b37b9c" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-book"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://stackoverflow.com/" title="Stack Overflow" target="_blank">Stack Overflow</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cnblogs.com/" title="博客园" target="_blank">博客园</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.pgyer.com/" title="蒲公英" target="_blank">蒲公英</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://weibo.com/login.php" title="新浪微博" target="_blank">新浪微博</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-App上架前的准备"><span class="nav-number">1.</span> <span class="nav-text">一.App上架前的准备.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-登陆苹果开发者官网"><span class="nav-number">2.</span> <span class="nav-text">二.登陆苹果开发者官网.</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-进入苹果开发者官网"><span class="nav-number">2.1.</span> <span class="nav-text">1.进入苹果开发者官网.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-点击Acount"><span class="nav-number">2.2.</span> <span class="nav-text">2.点击Acount.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-输入开发者账号-点击Sign-in-登陆"><span class="nav-number">2.3.</span> <span class="nav-text">3.输入开发者账号,点击Sign in(登陆)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-生成发布证书"><span class="nav-number">3.</span> <span class="nav-text">三.生成发布证书</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-点击Certifcates-Identifiers-amp-Profiles-证书-id-配置"><span class="nav-number">3.1.</span> <span class="nav-text">1.点击Certifcates,Identifiers & Profiles(证书,id,配置)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-点击All-再点击”-”号-添加发布证书"><span class="nav-number">3.2.</span> <span class="nav-text">2.点击All,再点击”+”号,添加发布证书.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-选择App-Store-and-Ad-Hoc-之后continue"><span class="nav-number">3.3.</span> <span class="nav-text">3.选择App Store and Ad Hoc.之后continue.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-还是continue"><span class="nav-number">3.4.</span> <span class="nav-text">4.还是continue.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-这里需要选择CSR文件"><span class="nav-number">3.5.</span> <span class="nav-text">5.这里需要选择CSR文件.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-打开钥匙串-钥匙串在Launchpad的Other文件夹中"><span class="nav-number">3.6.</span> <span class="nav-text">6.打开钥匙串,钥匙串在Launchpad的Other文件夹中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-点击钥匙串访问-gt-证书助理-gt-从证书颁发机构请求证书"><span class="nav-number">3.7.</span> <span class="nav-text">7.点击钥匙串访问 -> 证书助理 ->从证书颁发机构请求证书.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-电子邮件地址随意填写-邮箱常用名可不填-存储到磁盘"><span class="nav-number">3.8.</span> <span class="nav-text">8.电子邮件地址随意填写,邮箱常用名可不填,存储到磁盘.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-存储在磁盘上的CSR文件"><span class="nav-number">3.9.</span> <span class="nav-text">9.存储在磁盘上的CSR文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-将CSR上传苹果服务器"><span class="nav-number">3.10.</span> <span class="nav-text">10.将CSR上传苹果服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-点击Download下载CER文件-保存并双击运行-运行完成后-点击Done"><span class="nav-number">3.11.</span> <span class="nav-text">11.点击Download下载CER文件,保存并双击运行,运行完成后,点击Done.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-运行之后-在钥匙串里生成证书-确保证书有效"><span class="nav-number">3.12.</span> <span class="nav-text">12.运行之后,在钥匙串里生成证书,确保证书有效.</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-创建App-IDs并绑定App的Bundle-Identifier"><span class="nav-number">4.</span> <span class="nav-text">四.创建App IDs并绑定App的Bundle Identifier</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-点击App-IDs-点击”-”号"><span class="nav-number">4.1.</span> <span class="nav-text">1.点击App IDs,点击”+”号.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-填写AppID-和-Bundle-Identifier-name可以根据公司项目名来填写-日期只是为了标记这个App-ID创建的时间-建议填写-Bundle-Identifier则为项目的Bundle-ID"><span class="nav-number">4.2.</span> <span class="nav-text">2.填写AppID 和 Bundle Identifier,name可以根据公司项目名来填写,日期只是为了标记这个App ID创建的时间.建议填写.Bundle Identifier则为项目的Bundle ID.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-选择App-Services-默认为两项-根据具体需求选择-点击continue完成创建"><span class="nav-number">4.3.</span> <span class="nav-text">3.选择App Services,默认为两项,(根据具体需求选择),点击continue完成创建.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-点击Register"><span class="nav-number">4.4.</span> <span class="nav-text">4.点击Register</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-点击Done"><span class="nav-number">4.5.</span> <span class="nav-text">5.点击Done</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-注册成功后内容"><span class="nav-number">4.6.</span> <span class="nav-text">6.注册成功后内容</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五-生成描述文件"><span class="nav-number">5.</span> <span class="nav-text">五.生成描述文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-描述文件是描述哪台电脑能对哪个Bundle-Identifier的工程进行打包测试或发布-点击Provisioning-Profiles-点击All-再点击右上角”-”号"><span class="nav-number">5.1.</span> <span class="nav-text">1.描述文件是描述哪台电脑能对哪个Bundle Identifier的工程进行打包测试或发布.点击Provisioning Profiles,点击All,再点击右上角”+”号.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-如果是发布-选择App-Store这个描述文件-英译为-创建发布描述文件以提交你的app到App-Store"><span class="nav-number">5.2.</span> <span class="nav-text">2.如果是发布,选择App Store这个描述文件,英译为:创建发布描述文件以提交你的app到App Store;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-在App-ID这个选项栏里面找到你刚刚创建的-App-ID-点击Continue"><span class="nav-number">5.3.</span> <span class="nav-text">3.在App ID这个选项栏里面找到你刚刚创建的:App ID,点击Continue.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-选择你刚创建的发布证书，根据自己电脑上的发布证书日期来选择，点击Continue"><span class="nav-number">5.4.</span> <span class="nav-text">4.选择你刚创建的发布证书，根据自己电脑上的发布证书日期来选择，点击Continue.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-在Profile-Name栏里输入一个名称-这个是Provisioning-Profile-简称PP文件-文件的名称-可随便输入-文件名后缀可带上日期-方便以后使用-然后点击Continue"><span class="nav-number">5.5.</span> <span class="nav-text">5.在Profile Name栏里输入一个名称,这个是Provisioning Profile(简称PP文件)文件的名称,可随便输入,文件名后缀可带上日期,方便以后使用.然后点击Continue.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-Download文件-并双击运行-点击done完成"><span class="nav-number">5.6.</span> <span class="nav-text">6.Download文件,并双击运行,点击done完成.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-Download生成的PPFile"><span class="nav-number">5.7.</span> <span class="nav-text">7.Download生成的PPFile.</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六-在iTunes-Connect中添加上传App信息并提交到Appstore"><span class="nav-number">6.</span> <span class="nav-text">六.在iTunes Connect中添加上传App信息并提交到Appstore.</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-用开发者账号登陆iTunes-Connect"><span class="nav-number">6.1.</span> <span class="nav-text">1.用开发者账号登陆iTunes Connect.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-点击我的App"><span class="nav-number">6.2.</span> <span class="nav-text">2.点击我的App</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-点击”-”号-然后新建App"><span class="nav-number">6.3.</span> <span class="nav-text">3.点击”+”号,然后新建App.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-按要求填写信息-SKU是公司用于做统计数据之类的id，根据公司需求填写"><span class="nav-number">6.4.</span> <span class="nav-text">4.按要求填写信息,SKU是公司用于做统计数据之类的id，根据公司需求填写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-每个描述后面的-号是苹果提供的提示"><span class="nav-number">6.5.</span> <span class="nav-text">5.每个描述后面的?号是苹果提供的提示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-填写App名称、套装ID、类别-分级位置显示-无分级-具体分级需要在后面填写"><span class="nav-number">6.6.</span> <span class="nav-text">6.填写App名称、套装ID、类别.分级位置显示:无分级.具体分级需要在后面填写.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-填写价格、销售范围、批量购买计划"><span class="nav-number">6.7.</span> <span class="nav-text">7.填写价格、销售范围、批量购买计划.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-需要3-5寸、4寸、4-7寸、5-5寸预览图片-每个尺寸都要至少3张"><span class="nav-number">6.8.</span> <span class="nav-text">8.需要3.5寸、4寸、4.7寸、5.5寸预览图片,每个尺寸都要至少3张.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-App的描述根据公司需求填写-如果App名称为”XX助手”-关键词可以写-”XX、助手、XX助手”-关键词主要是为了让用户在AppStore上搜索应用时-能通过对应关键词能找到匹配的App"><span class="nav-number">6.9.</span> <span class="nav-text">9.App的描述根据公司需求填写,如果App名称为”XX助手”,关键词可以写:”XX、助手、XX助手”,关键词主要是为了让用户在AppStore上搜索应用时,能通过对应关键词能找到匹配的App.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-iMessage-App图中已经说明很清楚-一般不用处理"><span class="nav-number">6.10.</span> <span class="nav-text">10.iMessage App图中已经说明很清楚,一般不用处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-填写App图标"><span class="nav-number">6.11.</span> <span class="nav-text">11.填写App图标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-分级填写-如图分级定为17-如果想要4-无限制的网络访问改为否"><span class="nav-number">6.12.</span> <span class="nav-text">12.分级填写,如图分级定为17+,如果想要4+,无限制的网络访问改为否.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-如果XX助手App涉及和带有蓝牙的硬件连接-需要上传App和硬件使用操作的视频演示地址-我上传的是优酷-只要是App和硬件进行交互-就需要有App操作视频演示地址"><span class="nav-number">6.13.</span> <span class="nav-text">13.如果XX助手App涉及和带有蓝牙的硬件连接,需要上传App和硬件使用操作的视频演示地址,我上传的是优酷.(只要是App和硬件进行交互,就需要有App操作视频演示地址)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14-Apple-Watch图中也说明很清楚-一般不用处理"><span class="nav-number">6.14.</span> <span class="nav-text">14.Apple Watch图中也说明很清楚,一般不用处理.</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七-xcode打包项目"><span class="nav-number">7.</span> <span class="nav-text">七.xcode打包项目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-构建版本-需要到Xcode中去打包"><span class="nav-number">7.1.</span> <span class="nav-text">1.构建版本,需要到Xcode中去打包.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-版本选择的问题"><span class="nav-number">7.2.</span> <span class="nav-text">2.版本选择的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-打开Xcode-设备选择Generic-iOS-Device-然后使用快捷键Command-B-进行编译-下图中有一些简单说明"><span class="nav-number">7.3.</span> <span class="nav-text">3.打开Xcode,设备选择Generic iOS Device.然后使用快捷键Command + B,进行编译.下图中有一些简单说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-选择Product-gt-Scheme-gt-Edit-Scheme-或者使用快捷键Command-lt-打开界面"><span class="nav-number">7.4.</span> <span class="nav-text">4.选择Product -> Scheme -> Edit Scheme 或者使用快捷键Command + < ,打开界面.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-把Run、Test、Profile、Analyze、Archive中的Build-Configuration全部改为Release-之后Close"><span class="nav-number">7.5.</span> <span class="nav-text">5.把Run、Test、Profile、Analyze、Archive中的Build Configuration全部改为Release.之后Close.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-编译成功-选择Product-gt-Archive-进行打包"><span class="nav-number">7.6.</span> <span class="nav-text">6.编译成功,选择Product -> Archive.进行打包.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-打包后弹窗-上传给苹果团队进行测试的包不能带有iPhone等字样-因为-苹果对打包的文件名称有要求-所以-我把”Unity-iPhone”改了"><span class="nav-number">7.7.</span> <span class="nav-text">7.打包后弹窗,上传给苹果团队进行测试的包不能带有iPhone等字样,因为,苹果对打包的文件名称有要求.所以,我把”Unity-iPhone”改了.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-选择Validate进行验证-再Choose对应的付费过的开发者团队"><span class="nav-number">7.8.</span> <span class="nav-text">8.选择Validate进行验证,再Choose对应的付费过的开发者团队.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-点击Validate"><span class="nav-number">7.9.</span> <span class="nav-text">9.点击Validate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-等待验证结果"><span class="nav-number">7.10.</span> <span class="nav-text">10.等待验证结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-验证失败-点击done-因为之前已经出现build为3的版本-所以-将build改为4-从步骤-五-6-再走一次流程-如果没错则继续"><span class="nav-number">7.11.</span> <span class="nav-text">11.验证失败,点击done.因为之前已经出现build为3的版本,所以,将build改为4,从步骤(五.6)再走一次流程.如果没错则继续.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-验证成功-如下-选择done"><span class="nav-number">7.12.</span> <span class="nav-text">12.验证成功,如下,选择done.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-选择Upload-to-App-Store-弹窗后还是选择付费的开发者团队"><span class="nav-number">7.13.</span> <span class="nav-text">13.选择Upload to App Store,弹窗后还是选择付费的开发者团队.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14-选择Upload"><span class="nav-number">7.14.</span> <span class="nav-text">14.选择Upload</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-等待上传"><span class="nav-number">7.15.</span> <span class="nav-text">15.等待上传</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#16-上传中"><span class="nav-number">7.16.</span> <span class="nav-text">16.上传中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#17-上传成功"><span class="nav-number">7.17.</span> <span class="nav-text">17.上传成功</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#18-返回到iTunes-Connect网站中-我的App-gt-准备提交-gt-选择构建版本右侧的”-”号"><span class="nav-number">7.18.</span> <span class="nav-text">18.返回到iTunes Connect网站中,我的App -> 准备提交 -> 选择构建版本右侧的”+”号.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#19-选择构建版本-点击完成"><span class="nav-number">7.19.</span> <span class="nav-text">19.选择构建版本,点击完成.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#20-提交审核"><span class="nav-number">7.20.</span> <span class="nav-text">20.提交审核.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#21-出现广告标识-根据情况填写-再提交"><span class="nav-number">7.21.</span> <span class="nav-text">21.出现广告标识,根据情况填写,再提交.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#22-App等待审核"><span class="nav-number">7.22.</span> <span class="nav-text">22.App等待审核.</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSDN"><span class="nav-number">8.</span> <span class="nav-text">CSDN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简书"><span class="nav-number">9.</span> <span class="nav-text">简书</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cherishJoy</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("hUIOauAOSIOYuI73o8R3vTsa-gzGzoHsz", "DFndnSRESYTVrekVyCxuuzSM");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS,类型转换," />
+  <meta name="keywords" content="iOS,常见问题,p12,证书," />
 
 
 
@@ -93,17 +93,21 @@
 
 
 
-<meta name="description" content="路漫漫其修远兮,吾将上下而求索.">
-<meta name="keywords" content="iOS,类型转换">
+<meta name="description" content="本文介绍了苹果证书无法导出p12格式的文件的解决方法. 一.打开钥匙串导出证书的默认界面,发现p12选项为灰色,无法选择.  说明:我对这种情况的证书进行测试,将直接导出.cer的证书,拷贝到其他电脑上并安装,打包项目时,提示:1No valid signing identities matching the team ID &quot;xxx&quot; were found. 在项目中,快捷键 command">
+<meta name="keywords" content="iOS,常见问题,p12,证书">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS开发之NSAttributedString使用">
-<meta property="og:url" content="http://cherishJoy.com/2017/06/07/iOS开发之 NSAttributedString使用/index.html">
+<meta property="og:title" content="iOS常见问题之苹果证书无法导出p12格式的文件">
+<meta property="og:url" content="http://cherishJoy.com/2017/06/06/iOS常见问题之苹果证书无法导出p12格式的文件/index.html">
 <meta property="og:site_name" content="CherishJoy">
-<meta property="og:description" content="路漫漫其修远兮,吾将上下而求索.">
-<meta property="og:updated_time" content="2017-06-11T06:00:03.000Z">
+<meta property="og:description" content="本文介绍了苹果证书无法导出p12格式的文件的解决方法. 一.打开钥匙串导出证书的默认界面,发现p12选项为灰色,无法选择.  说明:我对这种情况的证书进行测试,将直接导出.cer的证书,拷贝到其他电脑上并安装,打包项目时,提示:1No valid signing identities matching the team ID &quot;xxx&quot; were found. 在项目中,快捷键 command">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-2d38a50e4a07a158.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-762bd4f2705a78f5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-2823d7be1662b54e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-06-11T08:09:59.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS开发之NSAttributedString使用">
-<meta name="twitter:description" content="路漫漫其修远兮,吾将上下而求索.">
+<meta name="twitter:title" content="iOS常见问题之苹果证书无法导出p12格式的文件">
+<meta name="twitter:description" content="本文介绍了苹果证书无法导出p12格式的文件的解决方法. 一.打开钥匙串导出证书的默认界面,发现p12选项为灰色,无法选择.  说明:我对这种情况的证书进行测试,将直接导出.cer的证书,拷贝到其他电脑上并安装,打包项目时,提示:1No valid signing identities matching the team ID &quot;xxx&quot; were found. 在项目中,快捷键 command">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/3284707-2d38a50e4a07a158.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -131,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://cherishJoy.com/2017/06/07/iOS开发之 NSAttributedString使用/"/>
+  <link rel="canonical" href="http://cherishJoy.com/2017/06/06/iOS常见问题之苹果证书无法导出p12格式的文件/"/>
 
 
 
 
 
-  <title>iOS开发之NSAttributedString使用 | CherishJoy</title>
+  <title>iOS常见问题之苹果证书无法导出p12格式的文件 | CherishJoy</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -311,7 +315,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://cherishJoy.com/2017/06/07/iOS开发之 NSAttributedString使用/">
+    <link itemprop="mainEntityOfPage" href="http://cherishJoy.com/2017/06/06/iOS常见问题之苹果证书无法导出p12格式的文件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="cherishJoy">
@@ -328,7 +332,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">iOS开发之NSAttributedString使用</h1>
+          <h1 class="post-title" itemprop="name headline">iOS常见问题之苹果证书无法导出p12格式的文件</h1>
         
 
         <div class="post-meta">
@@ -340,8 +344,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-07T01:00:01+08:00">
-                2017-06-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-06T12:03:01+08:00">
+                2017-06-06
               </time>
             
 
@@ -363,8 +367,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categorys/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
+                  <a href="/categorys/iOS常见问题/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS常见问题</span>
                   </a>
                 </span>
 
@@ -380,7 +384,7 @@
 
           
           
-             <span id="/2017/06/07/iOS开发之 NSAttributedString使用/" class="leancloud_visitors" data-flag-title="iOS开发之NSAttributedString使用">
+             <span id="/2017/06/06/iOS常见问题之苹果证书无法导出p12格式的文件/" class="leancloud_visitors" data-flag-title="iOS常见问题之苹果证书无法导出p12格式的文件">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -405,7 +409,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  0
+                  250
                 </span>
               
 
@@ -427,7 +431,16 @@
       
 
       
-        
+        <blockquote>
+<p>本文介绍了苹果证书无法导出p12格式的文件的解决方法.</p>
+<h3 id="一-打开钥匙串导出证书的默认界面-发现p12选项为灰色-无法选择"><a href="#一-打开钥匙串导出证书的默认界面-发现p12选项为灰色-无法选择" class="headerlink" title="一.打开钥匙串导出证书的默认界面,发现p12选项为灰色,无法选择."></a>一.打开钥匙串导出证书的默认界面,发现p12选项为灰色,无法选择.</h3></blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3284707-2d38a50e4a07a158.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="默认导出界面"></p>
+<p>说明:<br>我对这种情况的证书进行测试,将直接导出.cer的证书,拷贝到其他电脑上并安装,打包项目时,提示:<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">No valid signing identities matching the team ID <span class="string">"xxx"</span> were found.</div></pre></td></tr></table></figure></p>
+<p>在项目中,快捷键 <code>command + ,</code>选择对应的AppleIDs,再选择对应的Team,点击ManageCertificates,可以看到证书报一个错误,这个错误就是由于安装.cer证书导致的.<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Missing private key</div></pre></td></tr></table></figure></p>
+<h3 id="二-打开钥匙串之后-选择种类-然后选择证书-再找到对应要导出的证书"><a href="#二-打开钥匙串之后-选择种类-然后选择证书-再找到对应要导出的证书" class="headerlink" title="二.打开钥匙串之后,选择种类,然后选择证书,再找到对应要导出的证书."></a>二.打开钥匙串之后,选择种类,然后选择证书,再找到对应要导出的证书.</h3><p><img src="http://upload-images.jianshu.io/upload_images/3284707-762bd4f2705a78f5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="正确选择证书的方式"></p>
+<h3 id="三-结果出现p12的选项"><a href="#三-结果出现p12的选项" class="headerlink" title="三.结果出现p12的选项."></a>三.结果出现p12的选项.</h3><p><img src="http://upload-images.jianshu.io/upload_images/3284707-2823d7be1662b54e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h3 id="四-导出后-设置对应密码-再拷贝到其他电脑上安装证书-便能正常打包程序"><a href="#四-导出后-设置对应密码-再拷贝到其他电脑上安装证书-便能正常打包程序" class="headerlink" title="四.导出后,设置对应密码,再拷贝到其他电脑上安装证书.便能正常打包程序."></a>四.导出后,设置对应密码,再拷贝到其他电脑上安装证书.便能正常打包程序.</h3><h3 id="简书"><a href="#简书" class="headerlink" title="简书"></a>简书</h3><p><a href="http://www.jianshu.com/p/824bfcef4a13" target="_blank" rel="external">iOS常见问题之苹果证书无法导出p12格式的文件</a></p>
+
       
     </div>
 
@@ -458,7 +471,11 @@
           
             <a href="/tags/iOS/" rel="tag"># iOS</a>
           
-            <a href="/tags/类型转换/" rel="tag"># 类型转换</a>
+            <a href="/tags/常见问题/" rel="tag"># 常见问题</a>
+          
+            <a href="/tags/p12/" rel="tag"># p12</a>
+          
+            <a href="/tags/证书/" rel="tag"># 证书</a>
           
         </div>
       
@@ -471,8 +488,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/07/iOS开发之App上架流程(2017)/" rel="next" title="iOS开发之App上架流程(2017)">
-                <i class="fa fa-chevron-left"></i> iOS开发之App上架流程(2017)
+              <a href="/2017/05/24/iOS和Unity交互之界面跳转/" rel="next" title="iOS和Unity交互之界面跳转">
+                <i class="fa fa-chevron-left"></i> iOS和Unity交互之界面跳转
               </a>
             
           </div>
@@ -481,8 +498,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/07/iOS开发之host配置(Mac)/" rel="prev" title="iOS开发之hos配置">
-                iOS开发之hos配置 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/06/iOS开发之host配置(Mac)/" rel="prev" title="iOS开发之host配置">
+                iOS开发之host配置 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -553,8 +570,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -591,7 +617,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -666,6 +692,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-打开钥匙串导出证书的默认界面-发现p12选项为灰色-无法选择"><span class="nav-number">1.</span> <span class="nav-text">一.打开钥匙串导出证书的默认界面,发现p12选项为灰色,无法选择.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-打开钥匙串之后-选择种类-然后选择证书-再找到对应要导出的证书"><span class="nav-number">2.</span> <span class="nav-text">二.打开钥匙串之后,选择种类,然后选择证书,再找到对应要导出的证书.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-结果出现p12的选项"><span class="nav-number">3.</span> <span class="nav-text">三.结果出现p12的选项.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-导出后-设置对应密码-再拷贝到其他电脑上安装证书-便能正常打包程序"><span class="nav-number">4.</span> <span class="nav-text">四.导出后,设置对应密码,再拷贝到其他电脑上安装证书.便能正常打包程序.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简书"><span class="nav-number">5.</span> <span class="nav-text">简书</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
