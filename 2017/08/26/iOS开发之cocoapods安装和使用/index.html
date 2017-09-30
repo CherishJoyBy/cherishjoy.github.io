@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="CherishJoy, By" />
+  <meta name="keywords" content="iOS,cocoapods," />
 
 
 
@@ -93,16 +93,19 @@
 
 
 
-<meta name="description" content="cherish_joy@163.com">
+<meta name="description" content="本文介绍了cocoapods的安装和使用过程.  一.配置cocoapods1.删除源(这个系统自带的不好用) $ sudo gem sources -r https://rubygems.org/   2.添加源(使用淘宝的镜像,记住要用https)(淘宝的镜像不更新了,建议以后使用https://gems.ruby-china.org/记录于2017.5.4)   $ sudo gem so">
+<meta name="keywords" content="iOS,cocoapods">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS开发之cocoapods安装和使用">
 <meta property="og:url" content="http://cherishJoy.com/2017/08/26/iOS开发之cocoapods安装和使用/index.html">
 <meta property="og:site_name" content="CherishJoy">
-<meta property="og:description" content="cherish_joy@163.com">
-<meta property="og:updated_time" content="2017-08-25T20:18:21.000Z">
+<meta property="og:description" content="本文介绍了cocoapods的安装和使用过程.  一.配置cocoapods1.删除源(这个系统自带的不好用) $ sudo gem sources -r https://rubygems.org/   2.添加源(使用淘宝的镜像,记住要用https)(淘宝的镜像不更新了,建议以后使用https://gems.ruby-china.org/记录于2017.5.4)   $ sudo gem so">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-7be66d85b94bbe7d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="og:updated_time" content="2017-08-26T16:36:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS开发之cocoapods安装和使用">
-<meta name="twitter:description" content="cherish_joy@163.com">
+<meta name="twitter:description" content="本文介绍了cocoapods的安装和使用过程.  一.配置cocoapods1.删除源(这个系统自带的不好用) $ sudo gem sources -r https://rubygems.org/   2.添加源(使用淘宝的镜像,记住要用https)(淘宝的镜像不更新了,建议以后使用https://gems.ruby-china.org/记录于2017.5.4)   $ sudo gem so">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/3284707-7be66d85b94bbe7d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
 
 
 
@@ -349,6 +352,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categorys/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -381,7 +406,7 @@
                   <span class="post-meta-item-text">字数</span>
                 
                 <span title="字数">
-                  0 
+                  1,660 
                 </span>
               
 
@@ -403,7 +428,73 @@
       
 
       
-        
+        <blockquote>
+<p>本文介绍了cocoapods的安装和使用过程.</p>
+</blockquote>
+<h3 id="一-配置cocoapods"><a href="#一-配置cocoapods" class="headerlink" title="一.配置cocoapods"></a>一.配置cocoapods</h3><h4 id="1-删除源-这个系统自带的不好用"><a href="#1-删除源-这个系统自带的不好用" class="headerlink" title="1.删除源(这个系统自带的不好用)"></a>1.删除源(这个系统自带的不好用)</h4><blockquote>
+<p>$ sudo gem sources -r <a href="https://rubygems.org/" target="_blank" rel="external">https://rubygems.org/ </a></p>
+</blockquote>
+<h4 id="2-添加源-使用淘宝的镜像-记住要用https"><a href="#2-添加源-使用淘宝的镜像-记住要用https" class="headerlink" title="2.添加源(使用淘宝的镜像,记住要用https)"></a>2.添加源(使用淘宝的镜像,记住要用https)</h4><p>(淘宝的镜像不更新了,建议以后使用<a href="https://gems.ruby-china.org/" target="_blank" rel="external">https://gems.ruby-china.org/</a>记录于2017.5.4) </p>
+<blockquote>
+<p>$ sudo gem sources -a <a href="https://ruby.taobao.org/" target="_blank" rel="external">https://ruby.taobao.org/ </a></p>
+</blockquote>
+<h4 id="3-查看是否使用的是淘宝镜像"><a href="#3-查看是否使用的是淘宝镜像" class="headerlink" title="3.查看是否使用的是淘宝镜像"></a>3.查看是否使用的是淘宝镜像</h4><blockquote>
+<p>$ gem sources -l </p>
+</blockquote>
+<h4 id="4-安装-cocoapods"><a href="#4-安装-cocoapods" class="headerlink" title="4.安装 cocoapods"></a>4.安装 cocoapods</h4><blockquote>
+<p>$ sudo gem install cocoapods</p>
+</blockquote>
+<p>注意:在执行<code>sudo gem install cocoapods</code>命令时,出现错误:<code>Error installing cocoapods:activesupport requires Ruby version &gt;= 2.2.0</code>,表示要安装ruby大于等于2.2.0的版本(这里安装ruby2.3.0的版本).</p>
+<h4 id="5-查看ruby当前版本"><a href="#5-查看ruby当前版本" class="headerlink" title="5.查看ruby当前版本"></a>5.查看ruby当前版本</h4><blockquote>
+<p>$ ruby -v    (当前版本是2.0.0)</p>
+</blockquote>
+<p>注意:先安装rvm,通过rvm去安装2.3.0的ruby.</p>
+<h4 id="6-安装-rvm"><a href="#6-安装-rvm" class="headerlink" title="6.安装 rvm"></a>6.安装 rvm</h4><p>rvm:ruby Version Manager,ruby版本管理器,包括ruby的版本管理和Gem库管理(gemset)</p>
+<blockquote>
+<p>$ curl -L <a href="http://get.rvm.io" target="_blank" rel="external">get.rvm.io</a> | bash -s stable   (等待一段时间后便成功安装 rvm)</p>
+</blockquote>
+<h4 id="7-查询rvm的当前版本"><a href="#7-查询rvm的当前版本" class="headerlink" title="7.查询rvm的当前版本"></a>7.查询rvm的当前版本</h4><blockquote>
+<p>$ rvm -v</p>
+</blockquote>
+<h4 id="8-安装ruby-2-3-0"><a href="#8-安装ruby-2-3-0" class="headerlink" title="8.安装ruby 2.3.0"></a>8.安装ruby 2.3.0</h4><blockquote>
+<p>$ rvm install 2.3.0</p>
+</blockquote>
+<h4 id="9-再次查看ruby当前版本"><a href="#9-再次查看ruby当前版本" class="headerlink" title="9.再次查看ruby当前版本"></a>9.再次查看ruby当前版本</h4><blockquote>
+<p>$ ruby -v  (版本为2.3.0)</p>
+</blockquote>
+<h4 id="10-再次安装cocoapods"><a href="#10-再次安装cocoapods" class="headerlink" title="10.再次安装cocoapods"></a>10.再次安装cocoapods</h4><blockquote>
+<p>$ sudo gem install cocoapods</p>
+</blockquote>
+<p>注意:出现Setting up CocoaPods master repo,说明Cocoapods在将它的信息下载到<code>~/.cocoapods</code>路径中;cd  到该目录中,用du -sh *命令来查看文件大小,每隔几分钟查看一次,这个目录最终大小是700多M,就表示下载完成了.</p>
+<h4 id="11-进入-cocoapods文件目录中"><a href="#11-进入-cocoapods文件目录中" class="headerlink" title="11.进入~/.cocoapods文件目录中"></a>11.进入~/.cocoapods文件目录中</h4><blockquote>
+<p>$ cd ~/.cocoapods</p>
+</blockquote>
+<h4 id="12-查看文件大小"><a href="#12-查看文件大小" class="headerlink" title="12.查看文件大小"></a>12.查看文件大小</h4><blockquote>
+<p>$ du -sh *</p>
+</blockquote>
+<h4 id="13-安装成功之后-查看是否是最新版本-目前最新版本是1-0-1"><a href="#13-安装成功之后-查看是否是最新版本-目前最新版本是1-0-1" class="headerlink" title="13.安装成功之后,查看是否是最新版本(目前最新版本是1.0.1)"></a>13.安装成功之后,查看是否是最新版本(目前最新版本是1.0.1)</h4><blockquote>
+<p>$ pod –version</p>
+</blockquote>
+<h3 id="二-将第三方框架集成到项目中"><a href="#二-将第三方框架集成到项目中" class="headerlink" title="二.将第三方框架集成到项目中"></a>二.将第三方框架集成到项目中</h3><h4 id="1-进入项目文件的目录中-BYSliderChooseView是项目文件名"><a href="#1-进入项目文件的目录中-BYSliderChooseView是项目文件名" class="headerlink" title="1.进入项目文件的目录中(BYSliderChooseView是项目文件名)"></a>1.进入项目文件的目录中(<code>BYSliderChooseView</code>是项目文件名)</h4><blockquote>
+<p>$ cd /Users/lby/Desktop/GitHub/BYSliderChooseView </p>
+</blockquote>
+<h4 id="2-初始化一个podfile文件-在对应路径中创建podfile文件"><a href="#2-初始化一个podfile文件-在对应路径中创建podfile文件" class="headerlink" title="2.初始化一个podfile文件(在对应路径中创建podfile文件)"></a>2.初始化一个podfile文件(在对应路径中创建podfile文件)</h4><blockquote>
+<p>$ pod init</p>
+</blockquote>
+<h4 id="3-搜索你需要用到的第三方框架-如-SDWebImage-找到之后-复制-pod-‘SDWebImage’-到podfile中-如果要指定版本号-就跟上版本号就行"><a href="#3-搜索你需要用到的第三方框架-如-SDWebImage-找到之后-复制-pod-‘SDWebImage’-到podfile中-如果要指定版本号-就跟上版本号就行" class="headerlink" title="3.搜索你需要用到的第三方框架(如:SDWebImage)找到之后,复制 pod ‘SDWebImage’ 到podfile中,如果要指定版本号,就跟上版本号就行."></a>3.搜索你需要用到的第三方框架(如:<code>SDWebImage</code>)找到之后,复制 pod ‘SDWebImage’ 到podfile中,如果要指定版本号,就跟上版本号就行.</h4><blockquote>
+<p>$ pod search SDWebImage<br>(或$ pod ‘SDWebImage’, ‘~&gt; 4.1.0’)</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3284707-7be66d85b94bbe7d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="image.png"></p>
+<p>podfile文件中代码如下:(platform指支持的最低版本,可以根据项目情况调整,<code>BYSliderChooseView</code>是项目名称)</p>
+<blockquote>
+<p>platform :ios, ‘9.0’<br>target ‘BYSliderChooseView’ do<br>pod ‘SDWebImage’, ‘~&gt; 4.1.0’<br>end</p>
+</blockquote>
+<h4 id="4-安装-pod-install-如果是更新使用-pod-update-–repo-no-update"><a href="#4-安装-pod-install-如果是更新使用-pod-update-–repo-no-update" class="headerlink" title="4.安装$ pod install (如果是更新使用:pod update –repo-no-update)"></a>4.安装$ pod install (如果是更新使用:pod update –repo-no-update)</h4><p>完成之后有个提示:Please close any current Xcode sessions and use <code>&#39;BYSliderChooseView.xcworkspace&#39;</code> for this project from now on.</p>
+<hr>
+<p>以上是之前安装和使用的过程,而这次做了一个尝试.(2017MacPro Without TouchBar)<br>1.ruby版本不变,仍旧是2.0.0版本.<br>2.使用系统自带的源.<br>3.已经翻墙.<br>所以,在什么都不改变的情况下,直接执行<br><code>sudo gem install cocoapods</code>命令,没有报错,有一系列执行结果,运行完成,再执行<code>pod setup</code>,出现<code>Setting up CocoaPods master repo</code>,等待,如果看到`Setup completed,就安装完成了.</p>
+<p>附上操作内容:<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div></pre></td><td class="code"><pre><div class="line">Last login: Thu Aug 24 12:52:58 on ttys000</div><div class="line">localhost:~ lby$ ruby -v(执行代码)</div><div class="line">ruby 2.0.0p648 (2015-12-16 revision 53162) [universal.x86_64-darwin16]</div><div class="line">localhost:~ lby$ sudo gem install cocoapods(执行代码)</div><div class="line">Password:(执行代码)</div><div class="line">Fetching: i18n-0.8.6.gem (100%)</div><div class="line">Successfully installed i18n-0.8.6</div><div class="line">Fetching: thread_safe-0.3.6.gem (100%)</div><div class="line">Successfully installed thread_safe-0.3.6</div><div class="line">Fetching: tzinfo-1.2.3.gem (100%)</div><div class="line">Successfully installed tzinfo-1.2.3</div><div class="line">Fetching: minitest-5.10.3.gem (100%)</div><div class="line">Successfully installed minitest-5.10.3</div><div class="line">Fetching: activesupport-4.2.9.gem (100%)</div><div class="line">Successfully installed activesupport-4.2.9</div><div class="line">Fetching: nap-1.1.0.gem (100%)</div><div class="line">Successfully installed nap-1.1.0</div><div class="line">Fetching: fuzzy_match-2.0.4.gem (100%)</div><div class="line">Successfully installed fuzzy_match-2.0.4</div><div class="line">Fetching: cocoapods-core-1.3.1.gem (100%)</div><div class="line">Successfully installed cocoapods-core-1.3.1</div><div class="line">Fetching: claide-1.0.2.gem (100%)</div><div class="line">Successfully installed claide-1.0.2</div><div class="line">Fetching: cocoapods-deintegrate-1.0.1.gem (100%)</div><div class="line">Successfully installed cocoapods-deintegrate-1.0.1</div><div class="line">Fetching: cocoapods-downloader-1.1.3.gem (100%)</div><div class="line">Successfully installed cocoapods-downloader-1.1.3</div><div class="line">Fetching: cocoapods-plugins-1.0.0.gem (100%)</div><div class="line">Successfully installed cocoapods-plugins-1.0.0</div><div class="line">Fetching: cocoapods-search-1.0.0.gem (100%)</div><div class="line">Successfully installed cocoapods-search-1.0.0</div><div class="line">Fetching: cocoapods-stats-1.0.0.gem (100%)</div><div class="line">Successfully installed cocoapods-stats-1.0.0</div><div class="line">Fetching: netrc-0.7.8.gem (100%)</div><div class="line">Successfully installed netrc-0.7.8</div><div class="line">Fetching: cocoapods-trunk-1.2.0.gem (100%)</div><div class="line">Successfully installed cocoapods-trunk-1.2.0</div><div class="line">Fetching: cocoapods-try-1.1.0.gem (100%)</div><div class="line">Successfully installed cocoapods-try-1.1.0</div><div class="line">Fetching: molinillo-0.5.7.gem (100%)</div><div class="line">Successfully installed molinillo-0.5.7</div><div class="line">Fetching: CFPropertyList-2.3.5.gem (100%)</div><div class="line">Successfully installed CFPropertyList-2.3.5</div><div class="line">Fetching: colored2-3.1.2.gem (100%)</div><div class="line">Successfully installed colored2-3.1.2</div><div class="line">Fetching: nanaimo-0.2.3.gem (100%)</div><div class="line">Successfully installed nanaimo-0.2.3</div><div class="line">Fetching: xcodeproj-1.5.1.gem (100%)</div><div class="line">Successfully installed xcodeproj-1.5.1</div><div class="line">Fetching: escape-0.0.4.gem (100%)</div><div class="line">Successfully installed escape-0.0.4</div><div class="line">Fetching: fourflusher-2.0.1.gem (100%)</div><div class="line">Successfully installed fourflusher-2.0.1</div><div class="line">Fetching: gh_inspector-1.0.3.gem (100%)</div><div class="line">Successfully installed gh_inspector-1.0.3</div><div class="line">Fetching: ruby-macho-1.1.0.gem (100%)</div><div class="line">Successfully installed ruby-macho-1.1.0</div><div class="line">Fetching: cocoapods-1.3.1.gem (100%)</div><div class="line">Successfully installed cocoapods-1.3.1</div><div class="line">Parsing documentation for i18n-0.8.6</div><div class="line">Installing ri documentation for i18n-0.8.6</div><div class="line">Parsing documentation for thread_safe-0.3.6</div><div class="line">Installing ri documentation for thread_safe-0.3.6</div><div class="line">Parsing documentation for tzinfo-1.2.3</div><div class="line">Installing ri documentation for tzinfo-1.2.3</div><div class="line">Parsing documentation for minitest-5.10.3</div><div class="line">Installing ri documentation for minitest-5.10.3</div><div class="line">Parsing documentation for activesupport-4.2.9</div><div class="line">unable to convert "\x84" from ASCII-8BIT to UTF-8 for lib/active_support/values/unicode_tables.dat, skipping</div><div class="line">Installing ri documentation for activesupport-4.2.9</div><div class="line">Parsing documentation for nap-1.1.0</div><div class="line">Installing ri documentation for nap-1.1.0</div><div class="line">Parsing documentation for fuzzy_match-2.0.4</div><div class="line">Installing ri documentation for fuzzy_match-2.0.4</div><div class="line">Parsing documentation for cocoapods-core-1.3.1</div><div class="line">Installing ri documentation for cocoapods-core-1.3.1</div><div class="line">Parsing documentation for claide-1.0.2</div><div class="line">Installing ri documentation for claide-1.0.2</div><div class="line">Parsing documentation for cocoapods-deintegrate-1.0.1</div><div class="line">Installing ri documentation for cocoapods-deintegrate-1.0.1</div><div class="line">Parsing documentation for cocoapods-downloader-1.1.3</div><div class="line">Installing ri documentation for cocoapods-downloader-1.1.3</div><div class="line">Parsing documentation for cocoapods-plugins-1.0.0</div><div class="line">Installing ri documentation for cocoapods-plugins-1.0.0</div><div class="line">Parsing documentation for cocoapods-search-1.0.0</div><div class="line">Installing ri documentation for cocoapods-search-1.0.0</div><div class="line">Parsing documentation for cocoapods-stats-1.0.0</div><div class="line">Installing ri documentation for cocoapods-stats-1.0.0</div><div class="line">Parsing documentation for netrc-0.7.8</div><div class="line">Installing ri documentation for netrc-0.7.8</div><div class="line">Parsing documentation for cocoapods-trunk-1.2.0</div><div class="line">Installing ri documentation for cocoapods-trunk-1.2.0</div><div class="line">Parsing documentation for cocoapods-try-1.1.0</div><div class="line">Installing ri documentation for cocoapods-try-1.1.0</div><div class="line">Parsing documentation for molinillo-0.5.7</div><div class="line">Installing ri documentation for molinillo-0.5.7</div><div class="line">Parsing documentation for CFPropertyList-2.3.5</div><div class="line">Installing ri documentation for CFPropertyList-2.3.5</div><div class="line">Parsing documentation for colored2-3.1.2</div><div class="line">Installing ri documentation for colored2-3.1.2</div><div class="line">Parsing documentation for nanaimo-0.2.3</div><div class="line">Installing ri documentation for nanaimo-0.2.3</div><div class="line">Parsing documentation for xcodeproj-1.5.1</div><div class="line">Installing ri documentation for xcodeproj-1.5.1</div><div class="line">Parsing documentation for escape-0.0.4</div><div class="line">Installing ri documentation for escape-0.0.4</div><div class="line">Parsing documentation for fourflusher-2.0.1</div><div class="line">Installing ri documentation for fourflusher-2.0.1</div><div class="line">Parsing documentation for gh_inspector-1.0.3</div><div class="line">Installing ri documentation for gh_inspector-1.0.3</div><div class="line">Parsing documentation for ruby-macho-1.1.0</div><div class="line">Installing ri documentation for ruby-macho-1.1.0</div><div class="line">Parsing documentation for cocoapods-1.3.1</div><div class="line">Installing ri documentation for cocoapods-1.3.1</div><div class="line">27 gems installed</div><div class="line">localhost:~ lby$ cd ~/.cocoapods(执行代码)</div><div class="line">-bash: cd: /Users/lby/.cocoapods: No such file or directory</div><div class="line">localhost:~ lby$ gem sources -l(执行代码)</div><div class="line">*** CURRENT SOURCES ***</div><div class="line"></div><div class="line">[https://rubygems.org/](https://rubygems.org/)</div><div class="line">localhost:~ lby$ pod setup(执行代码)</div><div class="line">Setting up CocoaPods master repo</div><div class="line">  $ /usr/bin/git clone [https://github.com/CocoaPods/Specs.git](https://github.com/CocoaPods/Specs.git) master --progress</div><div class="line">  Cloning into 'master'...</div><div class="line">  remote: Counting objects: 1483411, done.       </div><div class="line">  remote: Compressing objects: 100% (316/316), done.       </div><div class="line">  remote: Total 1483411 (delta 169), reused 230 (delta 96), pack-reused 1482979       </div><div class="line">  Receiving objects: 100% (1483411/1483411), 419.73 MiB | 1.35 MiB/s, done.</div><div class="line">  Resolving deltas: 100% (768999/768999), done.</div><div class="line">  Checking out files: 100% (176707/176707), done.</div><div class="line">Setup completed</div><div class="line">localhost:~ lby$ cd ~/.cocoapods(执行代码)</div><div class="line">localhost:.cocoapods lby$ ls(执行代码)</div><div class="line">repos</div><div class="line">localhost:.cocoapods lby$</div></pre></td></tr></table></figure></p>
+<h3 id="简书"><a href="#简书" class="headerlink" title="简书"></a>简书</h3><p><a href="http://www.jianshu.com/p/ab4753a98eae" target="_blank" rel="external">iOS开发之cocoapods安装和使用</a> </p>
+
       
     </div>
 
@@ -429,6 +520,14 @@
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/cocoapods/" rel="tag"># cocoapods</a>
+          
+        </div>
       
 
       
@@ -522,8 +621,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            博主大大
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -560,7 +668,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -637,6 +745,22 @@
         
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-配置cocoapods"><span class="nav-number">1.</span> <span class="nav-text">一.配置cocoapods</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-删除源-这个系统自带的不好用"><span class="nav-number">1.1.</span> <span class="nav-text">1.删除源(这个系统自带的不好用)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-添加源-使用淘宝的镜像-记住要用https"><span class="nav-number">1.2.</span> <span class="nav-text">2.添加源(使用淘宝的镜像,记住要用https)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-查看是否使用的是淘宝镜像"><span class="nav-number">1.3.</span> <span class="nav-text">3.查看是否使用的是淘宝镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-安装-cocoapods"><span class="nav-number">1.4.</span> <span class="nav-text">4.安装 cocoapods</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-查看ruby当前版本"><span class="nav-number">1.5.</span> <span class="nav-text">5.查看ruby当前版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-安装-rvm"><span class="nav-number">1.6.</span> <span class="nav-text">6.安装 rvm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-查询rvm的当前版本"><span class="nav-number">1.7.</span> <span class="nav-text">7.查询rvm的当前版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-安装ruby-2-3-0"><span class="nav-number">1.8.</span> <span class="nav-text">8.安装ruby 2.3.0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-再次查看ruby当前版本"><span class="nav-number">1.9.</span> <span class="nav-text">9.再次查看ruby当前版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-再次安装cocoapods"><span class="nav-number">1.10.</span> <span class="nav-text">10.再次安装cocoapods</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-进入-cocoapods文件目录中"><span class="nav-number">1.11.</span> <span class="nav-text">11.进入~/.cocoapods文件目录中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-查看文件大小"><span class="nav-number">1.12.</span> <span class="nav-text">12.查看文件大小</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-安装成功之后-查看是否是最新版本-目前最新版本是1-0-1"><span class="nav-number">1.13.</span> <span class="nav-text">13.安装成功之后,查看是否是最新版本(目前最新版本是1.0.1)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-将第三方框架集成到项目中"><span class="nav-number">2.</span> <span class="nav-text">二.将第三方框架集成到项目中</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-进入项目文件的目录中-BYSliderChooseView是项目文件名"><span class="nav-number">2.1.</span> <span class="nav-text">1.进入项目文件的目录中(BYSliderChooseView是项目文件名)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-初始化一个podfile文件-在对应路径中创建podfile文件"><span class="nav-number">2.2.</span> <span class="nav-text">2.初始化一个podfile文件(在对应路径中创建podfile文件)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-搜索你需要用到的第三方框架-如-SDWebImage-找到之后-复制-pod-‘SDWebImage’-到podfile中-如果要指定版本号-就跟上版本号就行"><span class="nav-number">2.3.</span> <span class="nav-text">3.搜索你需要用到的第三方框架(如:SDWebImage)找到之后,复制 pod ‘SDWebImage’ 到podfile中,如果要指定版本号,就跟上版本号就行.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-安装-pod-install-如果是更新使用-pod-update-–repo-no-update"><span class="nav-number">2.4.</span> <span class="nav-text">4.安装$ pod install (如果是更新使用:pod update –repo-no-update)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简书"><span class="nav-number">3.</span> <span class="nav-text">简书</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
