@@ -93,13 +93,13 @@
 
 
 
-<meta name="description" content="本文主要对GCD的概念、API以及实现进行梳理.  CCD的概念.GCD,全称是Grand Central Dispatch,它是C语言的API.GCD的核心 : 将block(任务)添加到queue(队列)中. 根据官方文档ConcurrencyProgramingGuide中的描述:  One of the technologies for starting tasks asynchrono">
+<meta name="description" content="本文主要对GCD的概念、API以及实现进行梳理.  GCD的概念.GCD,全称是Grand Central Dispatch,它是C语言的API.GCD的核心 : 将block(任务)添加到queue(队列)中. 根据官方文档ConcurrencyProgramingGuide中的描述:  One of the technologies for starting tasks asynchrono">
 <meta name="keywords" content="读书笔记,GCD">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS读书笔记之Objective-C高级编程(GCD)">
 <meta property="og:url" content="http://cherishJoy.com/2017/07/02/iOS读书笔记之Objective-C高级编程(GCD)/index.html">
 <meta property="og:site_name" content="CherishJoy">
-<meta property="og:description" content="本文主要对GCD的概念、API以及实现进行梳理.  CCD的概念.GCD,全称是Grand Central Dispatch,它是C语言的API.GCD的核心 : 将block(任务)添加到queue(队列)中. 根据官方文档ConcurrencyProgramingGuide中的描述:  One of the technologies for starting tasks asynchrono">
+<meta property="og:description" content="本文主要对GCD的概念、API以及实现进行梳理.  GCD的概念.GCD,全称是Grand Central Dispatch,它是C语言的API.GCD的核心 : 将block(任务)添加到queue(队列)中. 根据官方文档ConcurrencyProgramingGuide中的描述:  One of the technologies for starting tasks asynchrono">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-6bc3e528d1f6af77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/500">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-f45caa56257e4edc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/500">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-fb678966aa43d656.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/500">
@@ -109,10 +109,10 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-586f1a2a16ddbc3f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/500">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-a95e193a3e60e949.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/500">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3284707-185cbde8895abd82.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/500">
-<meta property="og:updated_time" content="2017-07-02T04:07:09.000Z">
+<meta property="og:updated_time" content="2017-09-30T16:24:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS读书笔记之Objective-C高级编程(GCD)">
-<meta name="twitter:description" content="本文主要对GCD的概念、API以及实现进行梳理.  CCD的概念.GCD,全称是Grand Central Dispatch,它是C语言的API.GCD的核心 : 将block(任务)添加到queue(队列)中. 根据官方文档ConcurrencyProgramingGuide中的描述:  One of the technologies for starting tasks asynchrono">
+<meta name="twitter:description" content="本文主要对GCD的概念、API以及实现进行梳理.  GCD的概念.GCD,全称是Grand Central Dispatch,它是C语言的API.GCD的核心 : 将block(任务)添加到queue(队列)中. 根据官方文档ConcurrencyProgramingGuide中的描述:  One of the technologies for starting tasks asynchrono">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/3284707-6bc3e528d1f6af77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/500">
 
 
@@ -439,7 +439,7 @@
         <blockquote>
 <p>本文主要对GCD的概念、API以及实现进行梳理.</p>
 </blockquote>
-<h3 id="CCD的概念"><a href="#CCD的概念" class="headerlink" title="CCD的概念."></a>CCD的概念.</h3><h4 id="GCD-全称是Grand-Central-Dispatch-它是C语言的API"><a href="#GCD-全称是Grand-Central-Dispatch-它是C语言的API" class="headerlink" title="GCD,全称是Grand Central Dispatch,它是C语言的API."></a>GCD,全称是Grand Central Dispatch,它是C语言的API.</h4><p>GCD的核心 : 将block(任务)添加到queue(队列)中.</p>
+<h3 id="GCD的概念"><a href="#GCD的概念" class="headerlink" title="GCD的概念."></a>GCD的概念.</h3><h4 id="GCD-全称是Grand-Central-Dispatch-它是C语言的API"><a href="#GCD-全称是Grand-Central-Dispatch-它是C语言的API" class="headerlink" title="GCD,全称是Grand Central Dispatch,它是C语言的API."></a>GCD,全称是Grand Central Dispatch,它是C语言的API.</h4><p>GCD的核心 : 将block(任务)添加到queue(队列)中.</p>
 <p>根据官方文档<a href="https://developer.apple.com/library/content/documentation/General/Conceptual/ConcurrencyProgrammingGuide/ConcurrencyandApplicationDesign/ConcurrencyandApplicationDesign.html#//apple_ref/doc/uid/TP40008091-CH100-SW8" target="_blank" rel="external">ConcurrencyProgramingGuide</a>中的描述:</p>
 <blockquote>
 <p>One of the technologies for starting tasks asynchronously is Grand Central Dispatch (GCD). This technology takes the thread management code you would normally write in your own applications and moves that code down to the system level. All you have to do is define the tasks you want to execute and add them to an appropriate dispatch queue. GCD takes care of creating the needed threads and of scheduling your tasks to run on those threads. Because the thread management is now part of the system, GCD provides a holistic approach to task management and execution, providing better efficiency than traditional threads.</p>
@@ -777,7 +777,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -799,7 +799,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -886,7 +886,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#CCD的概念"><span class="nav-number">1.</span> <span class="nav-text">CCD的概念.</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GCD-全称是Grand-Central-Dispatch-它是C语言的API"><span class="nav-number">1.1.</span> <span class="nav-text">GCD,全称是Grand Central Dispatch,它是C语言的API.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GCD使用步骤"><span class="nav-number">1.2.</span> <span class="nav-text">GCD使用步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#日常使用"><span class="nav-number">1.3.</span> <span class="nav-text">日常使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多线程执行原理总结"><span class="nav-number">1.4.</span> <span class="nav-text">多线程执行原理总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CCD的API"><span class="nav-number">2.</span> <span class="nav-text">CCD的API.</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Dispatch-Queue"><span class="nav-number">2.1.</span> <span class="nav-text">Dispatch Queue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dispatch-queue-create"><span class="nav-number">2.2.</span> <span class="nav-text">dispatch_queue_create</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dispatch-set-target-queue"><span class="nav-number">2.3.</span> <span class="nav-text">dispatch_set_target_queue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dispatch-after"><span class="nav-number">2.4.</span> <span class="nav-text">dispatch_after</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dispatch-group"><span class="nav-number">2.5.</span> <span class="nav-text">dispatch group</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dispatch-barrier-async"><span class="nav-number">2.6.</span> <span class="nav-text">dispatch_barrier_async</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dispatch-sync"><span class="nav-number">2.7.</span> <span class="nav-text">dispatch_sync</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dispatch-apply"><span class="nav-number">2.8.</span> <span class="nav-text">dispatch_apply</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dispatch-suspend"><span class="nav-number">2.9.</span> <span class="nav-text">dispatch_suspend</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dispatch-resume"><span class="nav-number">2.10.</span> <span class="nav-text">dispatch_resume</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dispatch-semaphore"><span class="nav-number">2.11.</span> <span class="nav-text">dispatch semaphore</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dispatch-once"><span class="nav-number">2.12.</span> <span class="nav-text">dispatch_once</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CCD的实现"><span class="nav-number">3.</span> <span class="nav-text">CCD的实现.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简书"><span class="nav-number">4.</span> <span class="nav-text">简书</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#GCD的概念"><span class="nav-number">1.</span> <span class="nav-text">GCD的概念.</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GCD-全称是Grand-Central-Dispatch-它是C语言的API"><span class="nav-number">1.1.</span> <span class="nav-text">GCD,全称是Grand Central Dispatch,它是C语言的API.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GCD使用步骤"><span class="nav-number">1.2.</span> <span class="nav-text">GCD使用步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#日常使用"><span class="nav-number">1.3.</span> <span class="nav-text">日常使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多线程执行原理总结"><span class="nav-number">1.4.</span> <span class="nav-text">多线程执行原理总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CCD的API"><span class="nav-number">2.</span> <span class="nav-text">CCD的API.</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Dispatch-Queue"><span class="nav-number">2.1.</span> <span class="nav-text">Dispatch Queue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dispatch-queue-create"><span class="nav-number">2.2.</span> <span class="nav-text">dispatch_queue_create</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dispatch-set-target-queue"><span class="nav-number">2.3.</span> <span class="nav-text">dispatch_set_target_queue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dispatch-after"><span class="nav-number">2.4.</span> <span class="nav-text">dispatch_after</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dispatch-group"><span class="nav-number">2.5.</span> <span class="nav-text">dispatch group</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dispatch-barrier-async"><span class="nav-number">2.6.</span> <span class="nav-text">dispatch_barrier_async</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dispatch-sync"><span class="nav-number">2.7.</span> <span class="nav-text">dispatch_sync</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dispatch-apply"><span class="nav-number">2.8.</span> <span class="nav-text">dispatch_apply</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dispatch-suspend"><span class="nav-number">2.9.</span> <span class="nav-text">dispatch_suspend</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dispatch-resume"><span class="nav-number">2.10.</span> <span class="nav-text">dispatch_resume</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dispatch-semaphore"><span class="nav-number">2.11.</span> <span class="nav-text">dispatch semaphore</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dispatch-once"><span class="nav-number">2.12.</span> <span class="nav-text">dispatch_once</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CCD的实现"><span class="nav-number">3.</span> <span class="nav-text">CCD的实现.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简书"><span class="nav-number">4.</span> <span class="nav-text">简书</span></a></li></ol></div>
             
 
           </div>
